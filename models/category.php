@@ -8,11 +8,11 @@ private $CategoryDescription;
 private $dateCreation;
 
 
-public function addCategory($categoryName,$CategoryDescription,$dateCreation){
+public function addCategory($categoryName,$CategoryDescription){
     $connect=new Database();
     $pdo=$connect->connect();
-    $stmt=$pdo->prepare("INSERT INTO category (categoryName,CategoryDescription,dateCreation) VALUES (?,?,?)");
-    $stmt->execute([$categoryName,$CategoryDescription,$dateCreation]);
+    $stmt=$pdo->prepare("INSERT INTO category (categoryName,CategoryDescription) VALUES (?,?)");
+    $stmt->execute([$categoryName,$CategoryDescription]);
 
 }
 
