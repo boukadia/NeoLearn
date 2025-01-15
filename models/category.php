@@ -31,7 +31,7 @@ public function getCategory(){
                       
                         <td><span class='status active'>".$category['CategoryDescription']."</span></td>
                         <td><a href='edit-course.html' class='edit-btn'>delete</a>
-                        <a href='edit-course.html' class='edit-btn'>update</a></td>
+                        <a href='.updateCategory.php?categoryId=".$category['categoryId']."' class='edit-btn'>update</a></td>
                     </tr>
                 </tbody>
             ";
@@ -39,6 +39,42 @@ public function getCategory(){
     }
 
 }
+
+
+public function updateCategory($categoryId){
+    $connect=new Database();
+    $pdo=$connect->connect();
+    $stmt=$pdo->prepare("SELECT * from tags where tagId=?");
+    $stmt->execute([$categoryId]);
+    $category=$stmt->fetch(PDO::FETCH_ASSOC);
+    echo "<div class='form-container'>
+<h2>Ajouter une category</h2>
+<form ='' method='post'>
+    <div class='form-group'>
+        <label for='categoryName'>categorys</label>
+        <input type='text' id='categoryName' value='".$category['categoryName']."' name='categoryName' placeholder='Entrez le nom de la category' required>
+    </div>
+
+    <div class='form-group'>
+        <label for='categoryDescription'>description</label>
+        <input type='text' id='categoryDescription' value='".$category['categoryDescription']."' name='categoryDescription' placeholder='Entrez le nom de la description' required>
+    </div>
+  
+    
+    <div class='form-group'>
+        <button name='submit' type='submit'>Ajouter</button>
+    </div>
+
+</form>
+</div>
+";
+
+    
+  
+
+
+
+    }
 
 }
 
