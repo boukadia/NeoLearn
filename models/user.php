@@ -2,46 +2,36 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/config/database.php');
 // require_once "../config/database.php";
 class User{
-private $userName;
-private $email;
-private $password;
-private $role;
+
 private $pdo;
 
-public function __construct($email,$password){
-    // $this->userName=$userName;
-    $this->email=$email;
-    $this->password=$password;
-    // $this->role=$role;
 
-}
 
-    public function register($userName,$role){
-    $this->userName=$userName;
-    $this->role=$role;
+    public function register($userName,$email,$password,$role){
+   
 
 
         $connect=new Database();
         $this->pdo=$connect->connect();
-        $hashPassword = password_hash($this->password, PASSWORD_DEFAULT);
+        $hashPassword = password_hash($password, PASSWORD_DEFAULT);
 
         $stmt=$this->pdo->prepare("SELECT * FROM users");
         $stmt->execute();
         $user =$stmt->fetch(PDO::FETCH_ASSOC);
-        if ($user['email']==$this->email){
+        if ($user['email']==$email){
            return;
 
         }
         else {
         $stmt=$this->pdo->prepare("INSERT INTO users(username,email,password,role) VALUES (?,?,?,?)");
-        $stmt->execute([$this->userName,$this->email,$hashPassword,$this->role]);
+        $stmt->execute([$userName,$email,$hashPassword,$role]);
         }
 
 
     }
 
 
-    public function login(){
+    public function login($email,$password){
 
         $connect=new Database();
         $this->pdo=$connect->connect();
@@ -49,9 +39,9 @@ public function __construct($email,$password){
         // $hashPassword = password_hash($this->password, PASSWORD_DEFAULT);
 
         $stmt=$this->pdo->prepare("SELECT * FROM users where email=?");
-        $stmt->execute([$this->email]);
+        $stmt->execute([$email]);
         $user =$stmt->fetch(PDO::FETCH_ASSOC);
-        if ($user && password_verify($this->password, $user['password']) ){
+        if ($user && password_verify($password, $user['password']) ){
            $_SESSION['userId']=$user['userId'];
            $_SESSION['userName']=$user['username'];
            $_SESSION['email']=$user['email'];
@@ -60,8 +50,6 @@ public function __construct($email,$password){
                
             var_dump($_SESSION['role']);
                header("Location: ./student/index.php");
-            //    require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/views/student/index.php');
-               
             }
             else if ($_SESSION['role']=="enseignant"){
                 header("Location: ./enseignant/index.php");
@@ -75,12 +63,35 @@ public function __construct($email,$password){
         }
         else {
             var_dump($user['userId']);
-
         }
-
-
     }
    
+
+    public function getUsers(){
+
+        $connect=new Database();
+        $this->pdo=$connect->connect();
+        
+        // $hashPassword = password_hash($this->password, PASSWORD_DEFAULT);
+
+        $stmt=$this->pdo->prepare("SELECT * FROM users");
+        $stmt->execute();
+        while($user =$stmt->fetch(PDO::FETCH_ASSOC)){
+            echo "
+             <tbody>
+                    <tr>
+                        <td>".$user['userName']."</td>
+                      
+                        <td><span class='status active'>".$user['status']."</span></td>
+                        <td><a href='edit-course.html' class='edit-btn'>delete</a></td>
+                    </tr>
+                </tbody>
+            ";
+       
+            
+       
+    }
+}
 
 
 }

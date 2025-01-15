@@ -66,3 +66,22 @@ CREATE TABLE Enrollments (
   , FOREIGN KEY (studentId) REFERENCES Users(userId)
   , FOREIGN KEY (courseId) REFERENCES Courses(courseId)
 );
+
+
+-- ================================================trigger=================================
+
+DELIMITER //
+
+CREATE TRIGGER default_status
+BEFORE INSERT ON users
+FOR EACH ROW
+BEGIN
+    IF NEW.role = 'enseignant' THEN
+        SET NEW.status = 'pending';
+    ELSE
+        SET NEW.status = 'active';
+    END IF;
+END; //
+
+DELIMITER ;
+-- =================================================fin trigger=================================

@@ -1,3 +1,8 @@
+
+<?php 
+
+require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/user.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../../assests/css/style.css">
 
 </head>
 
@@ -80,6 +85,11 @@
             </div>
         </section>
 
+
+
+
+
+        
         <!-- Course Management -->
         <section class="course-management">
             <h2>Manage Courses</h2>
@@ -99,25 +109,28 @@
                         <td>John Doe</td>
                         <td>200</td>
                         <td><span class="status active">Active</span></td>
-                        <td><a href="edit-course.html" class="edit-btn">Edit</a></td>
+                        <td><a href="edit-course.html" class="edit-btn">delete</a></td>
                     </tr>
                     <tr>
                         <td>CSS Mastery</td>
                         <td>Jane Smith</td>
                         <td>180</td>
                         <td><span class="status inactive">Inactive</span></td>
-                        <td><a href="edit-course.html" class="edit-btn">Edit</a></td>
+                        <td><a href="edit-course.html" class="edit-btn">delete</a></td>
                     </tr>
                     <tr>
                         <td>JavaScript Essentials</td>
                         <td>Michael Johnson</td>
                         <td>150</td>
                         <td><span class="status active">Active</span></td>
-                        <td><a href="edit-course.html" class="edit-btn">Edit</a></td>
+                        <td><a href="edit-course.html" class="edit-btn">delete</a></td>
                     </tr>
                 </tbody>
             </table>
         </section>
+
+
+
 
         <!-- Recent Activity -->
         <section class="recent-activity">
