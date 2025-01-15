@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S'inscrire</title>
+
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../assests/css/style.css">
+    <style>
+        body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f7fc;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+    </style>
+
+</head>
+
+<body>
+
+    <div class="register-container">
+        <div class="register-box">
+            <h2>S'inscrire</h2>
+            <form action="insert.php" method="POST">
+                <div class="textbox">
+                    <input type="text" name="userName" placeholder="Votre nom complet" required>
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="textbox">
+                    <input type="email" name="email" placeholder="Votre email" required>
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="textbox">
+                    <input type="password" name="password" placeholder="Votre mot de passe" required>
+                    <i class="fas fa-lock"></i>
+                </div>
+              
+                <!-- Sélection du rôle -->
+                <div class="textbox">
+                    <select name="role" required>
+                        <option value="">Choisissez votre rôle</option>
+                        <option value="student">student</option>
+                        <option value="enseignant">enseignant</option>
+                    </select>
+                    <i class="fas fa-users"></i>
+                </div>
+                <button name="register" type="submit" class="btn">S'inscrire</button>
+                <div class="login-link">
+                    <p>Vous avez déjà un compte ? <a href="login.html">Se connecter</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>
