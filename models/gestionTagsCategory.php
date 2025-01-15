@@ -2,6 +2,7 @@
 <?php 
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/category.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/tags.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -66,6 +67,25 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/category.php');
               
               $category=new category();
               $category->getcategory();
+              ?>
+            </table>
+        </section>
+
+        <section class="course-management">
+            <h2>categorys</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>name</th>
+                        <th>Actions</th>
+                        
+
+                    </tr>
+                </thead>
+              <?php 
+              
+              $tag=new Tags();
+              $tag->getTag()
               ?>
             </table>
         </section>
