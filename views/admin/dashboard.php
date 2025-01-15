@@ -12,10 +12,8 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/user.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Youdemy</title>
 
-    <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
 
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="../../assests/css/style.css">
 
 </head>
@@ -29,17 +27,17 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/user.php');
         </div>
         <nav class="sidebar-nav">
             <ul>
-                <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                <li><a href="manage-courses.html"><i class="fas fa-graduation-cap"></i> Manage Courses</a></li>
-                <li><a href="manage-users.html"><i class="fas fa-users"></i> Manage Users</a></li>
-                <li><a href="statistics.html"><i class="fas fa-chart-bar"></i> Statistics</a></li>
-                <li><a href="settings.html"><i class="fas fa-cogs"></i> Settings</a></li>
-                <li><a href="logout.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                <li><a href="dashboard.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="gestionCourses.php"><i class="fas fa-graduation-cap"></i> Manage Courses</a></li>
+                <li><a href="../../models/gestionUser.php"><i class="fas fa-users"></i> Manage Users</a></li>
+                <li><a href="statistics.php"><i class="fas fa-chart-bar"></i> Statistics</a></li>
+                <li><a href="gestionTagsCategory.php"><i class="fas fa-tags"></i> Categories/Tags</a></li>
+                <li><a href="settings.php"><i class="fas fa-cogs"></i> Settings</a></li>
+                <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
             </ul>
         </nav>
     </div>
 
-    <!-- Main Content -->
     <div class="main-content">
         <!-- Header -->
         <header>
@@ -52,7 +50,6 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/user.php');
             </div>
         </header>
 
-        <!-- Dashboard Overview -->
         <section class="dashboard-overview">
             <h2>Overview</h2>
             <div class="cards">
@@ -75,22 +72,14 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/user.php');
             </div>
         </section>
 
-        <!-- Quick Links -->
-        <section class="quick-links">
-            <h2>Quick Links</h2>
-            <div class="links">
-                <a href="add-course.html" class="quick-link"><i class="fas fa-plus"></i> Add New Course</a>
-                <a href="view-students.html" class="quick-link"><i class="fas fa-eye"></i> View Students</a>
-                <a href="view-teachers.html" class="quick-link"><i class="fas fa-chalkboard-teacher"></i> View Teachers</a>
-            </div>
-        </section>
+
 
 
 
 
 
         
-        <!-- Course Management -->
+        <!------------------------ Course Management ---------------------------------->
         <section class="course-management">
             <h2>Manage Courses</h2>
             <table>
@@ -132,7 +121,6 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/user.php');
 
 
 
-        <!-- Recent Activity -->
         <section class="recent-activity">
             <h2>Recent Activity</h2>
             <ul>
@@ -150,7 +138,6 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/user.php');
         <p>&copy; 2025 Youdemy. All rights reserved.</p>
     </footer>
 
-    <!-- Custom JS -->
     <script src="js/script.js"></script>
 
 </body>

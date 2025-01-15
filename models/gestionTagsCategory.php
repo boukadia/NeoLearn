@@ -1,7 +1,7 @@
 
 <?php 
 
-require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/user.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/category.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,8 +11,10 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/user.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Youdemy</title>
 
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
 
+    
     <link rel="stylesheet" href="../assests/css/style.css">
 
 </head>
@@ -34,8 +36,9 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/user.php');
         </nav>
     </div>
 
+  
     <div class="main-content">
-
+        <!-- Header -->
         <header>
             <div class="header-content">
                 <h1>Welcome to Your Dashboard, Admin</h1>
@@ -48,23 +51,26 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/user.php');
 
     
 <section class="course-management">
-            <h2>Manage Courses</h2>
+            <h2>categorys</h2>
             <table>
                 <thead>
                     <tr>
-                        <th>enseignant</th>
-                        <th>Status</th>
+                        <th>name</th>
+                        <th>description</th>
                         <th>Actions</th>
+                        
+
                     </tr>
                 </thead>
               <?php 
               
-              $user=new User();
-              $user->getUsers();
+              $category=new category();
+              $category->getcategory();
               ?>
             </table>
         </section>
-          
+         
+         
 </body>
 
 </html>

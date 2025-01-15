@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -73,10 +73,10 @@
 
 <body>
     <div class="form-container">
-        <h2>Ajouter une Catégorie</h2>
+        <h2>Ajouter une Categorie</h2>
         <form action="../views/admin/insertCategory.php" method="post">
             <div class="form-group">
-                <label for="category">Nom de la catégorie</label>
+                <label for="category">Nom de la categorie</label>
                 <input type="text" id="categoryName" name="categoryName" placeholder="Entrez le nom de la catégorie" required>
             </div>
             <div class="form-group">

@@ -21,10 +21,8 @@ if ($_SESSION['role'] != "enseignant") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil Enseignant</title>
 
-    <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
 
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="../../assests/css/style.css">
 
 </head>
@@ -96,7 +94,6 @@ if ($_SESSION['role'] != "enseignant") {
             </div>
         </section>
 
-        <!-- Avis des étudiants -->
         <section class="student-reviews">
             <h2>Avis des Étudiants</h2>
             <div class="reviews">
