@@ -1,27 +1,28 @@
-
-<?php 
+<?php
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/category.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/tags.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Youdemy</title>
 
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
 
-    
+
     <link rel="stylesheet" href="../assests/css/style.css">
 
 </head>
+
 <body>
-     <!-- Sidebar -->
-     <div class="sidebar">
+    <!-- Sidebar -->
+    <div class="sidebar">
         <div class="sidebar-header">
             <h2 class="logo">Youdemy</h2>
         </div>
@@ -37,7 +38,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/tags.php');
         </nav>
     </div>
 
-  
+
     <div class="main-content">
         <!-- Header -->
         <header>
@@ -50,8 +51,8 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/tags.php');
             </div>
         </header>
 
-    
-<section class="course-management">
+
+        <section class="course-management">
             <h2>categorys</h2>
             <table>
                 <thead>
@@ -59,15 +60,15 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/tags.php');
                         <th>name</th>
                         <th>description</th>
                         <th>Actions</th>
-                        
+
 
                     </tr>
                 </thead>
-              <?php 
-              
-              $category=new category();
-              $category->getcategory();
-              ?>
+                <?php
+
+                $category = new category();
+                $category->getcategory();
+                ?>
             </table>
         </section>
 
@@ -78,23 +79,19 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/tags.php');
                     <tr>
                         <th>name</th>
                         <th>Actions</th>
-                        
+
 
                     </tr>
                 </thead>
-              <?php 
-              
-              $tag=new Tags();
-              $tag->getTag()
-              ?>
+                <?php
+
+                $tag = new Tags();
+                $tag->getTag()
+                ?>
             </table>
         </section>
-         
-         
+
+
 </body>
 
 </html>
-
-
-
-
