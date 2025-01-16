@@ -39,8 +39,8 @@ if ($_SESSION['role'] != "admin") {
                 <li><a href="../../models/gestionUser.php"><i class="fas fa-users"></i> Manage Users</a></li>
                 <li><a href="statistics.php"><i class="fas fa-chart-bar"></i> Statistics</a></li>
                 <li><a href="affichageCatTag.php"><i class="fas fa-tags"></i> Categories/Tags</a></li>
-                <li><a href="settings.php"><i class="fas fa-cogs"></i> Settings</a></li>
-                <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                <li><a href="affichageUsers.php"><i class="fas fa-chalkboard-teacher"></i> Enseignants</a></li>
+                <li><a href="../../models/logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
             </ul>
         </nav>
     </div>
