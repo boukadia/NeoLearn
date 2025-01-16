@@ -534,3 +534,30 @@ button.btn:hover {
   font-size: 14px;
   color: #555;
 }
+/* ============================================== */
+/* ============================================== */
+/* ============================================== */
+
+
+/* Section containing the buttons */
+.button-section {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+/* Style for "Add Category" and "Add Tag" buttons */
+.add-category-button, .add-tag-button {
+  padding: 12px 20px;
+  text-decoration: none;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.add-category-button:hover, .add-tag-button:hover {
+  background-color: #45a049;
+}

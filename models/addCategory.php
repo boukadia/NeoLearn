@@ -74,7 +74,7 @@
 <body>
     <div class="form-container">
         <h2>Ajouter une Categorie</h2>
-        <form action="../views/admin/insertCategory.php" method="post">
+        <form action="insertCategory.php" method="post">
             <div class="form-group">
                 <label for="category">Nom de la categorie</label>
                 <input type="text" id="categoryName" name="categoryName" placeholder="Entrez le nom de la catégorie" required>

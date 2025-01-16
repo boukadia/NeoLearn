@@ -10,6 +10,8 @@ $pdo=$connect->connect();
 
             $stmt=$pdo->prepare("UPDATE category  SET categoryName=?,categoryDescription=? where categoryId=?");
             $stmt->execute([$_POST['categoryName'],$_POST['categoryDescription'],$categoryId]);
+header("location:../views/admin/affichageCatTag.php");
+
 
 }
 

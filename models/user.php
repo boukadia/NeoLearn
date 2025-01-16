@@ -83,7 +83,9 @@ private $pdo;
                         <td>".$user['userName']."</td>
                       
                         <td><span class='status active'>".$user['status']."</span></td>
-                        <td><a href='edit-course.html' class='edit-btn'>delete</a></td>
+                        <td><a href='../../models/deleteUser.php?userId=".$user['userId']."' class='edit-btn'>delete</a>
+                        <a href='../../models/deleteUser.php?userId=".$user['userId']."' class='edit-btn'>switch</a>
+                        </td>
                     </tr>
                 </tbody>
             ";

@@ -2,6 +2,8 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/config/database.php');
 class Tags{
     private $tagName ;
+
+
     public function addTag($tagName){
         $connect=new Database();
         $pdo=$connect->connect();
@@ -20,8 +22,8 @@ class Tags{
                    <tr>
                        <td>".$tag['tagName']."</td>
                      
-                       <td><a href='edit-course.html' class='edit-btn'>delete</a>
-                       <a href='./updateTag.php?tagId=".$tag['tagId']."' class='edit-btn'>update</a></td>
+                       <td><a href='../../models/deleteTag.php?tagId=".$tag['tagId']."' class='edit-btn'>delete</a>
+                       <a href='../../models/updateTag.php?tagId=".$tag['tagId']."' class='edit-btn'>update</a></td>
                    </tr>
                </tbody>
            ";
@@ -34,11 +36,11 @@ class Tags{
     }
 
 
-    public function deleteTag(){
+    public function deleteTag($tagId){
         $connect=new Database();
         $pdo=$connect->connect();
-        $stmt=$pdo->prepare("SELECT * FROM  tags");
-        $stmt->execute();
+        $stmt=$pdo->prepare("DELETE  FROM  tags WHERE tagId=?");
+        $stmt->execute([$tagId]);
         }
         public function updateTag($tagId){
             $connect=new Database();

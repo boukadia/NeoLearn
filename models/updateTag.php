@@ -10,6 +10,7 @@ $pdo=$connect->connect();
 
             $stmt=$pdo->prepare("UPDATE tags  SET tagName=? where tagId=?");
             $stmt->execute([$_POST['tagName'],$tagId]);
+            header("location:../views/admin/affichageCatTag.php");
 
 }
 

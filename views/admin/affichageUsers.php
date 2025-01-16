@@ -13,7 +13,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/user.php');
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
 
-    <link rel="stylesheet" href="../assests/css/style.css">
+    <link rel="stylesheet" href="../../assests/css/style.css">
 
 </head>
 <body>
@@ -24,12 +24,14 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/user.php');
         </div>
         <nav class="sidebar-nav">
             <ul>
-                <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                <li><a href="manage-courses.html"><i class="fas fa-graduation-cap"></i> Manage Courses</a></li>
-                <li><a href="manage-users.html"><i class="fas fa-users"></i> Manage Users</a></li>
-                <li><a href="statistics.html"><i class="fas fa-chart-bar"></i> Statistics</a></li>
-                <li><a href="settings.html"><i class="fas fa-cogs"></i> Settings</a></li>
-                <li><a href="logout.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                <li><a href="dashboard.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="manage-courses.php"><i class="fas fa-graduation-cap"></i> Manage Courses</a></li>
+                <li><a href="affichageUsers.php"><i class="fas fa-users"></i> Manage Users</a></li>
+                <li><a href="statistics.php"><i class="fas fa-chart-bar"></i> Statistics</a></li>
+                <li><a href="affichageCatTag.php"><i class="fas fa-tags"></i> Categories/Tags</a></li>
+
+                <li><a href="settings.php"><i class="fas fa-cogs"></i> Settings</a></li>
+                <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
             </ul>
         </nav>
     </div>

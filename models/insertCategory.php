@@ -5,6 +5,8 @@ $CategoryDescription=$_POST['CategoryDescription'];
 
 $addCategory=new Category();
 $addCategory->addCategory($categoryName,$CategoryDescription);
+header("location:../views/admin/affichageCatTag.php")
+
 
 
 

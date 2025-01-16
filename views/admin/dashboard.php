@@ -2,6 +2,13 @@
 <?php 
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/user.php');
+session_start();
+if ($_SESSION['role'] != "admin") {
+    header("location : ../login.html");
+    exit();
+} else {
+
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,7 +38,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/user.php');
                 <li><a href="gestionCourses.php"><i class="fas fa-graduation-cap"></i> Manage Courses</a></li>
                 <li><a href="../../models/gestionUser.php"><i class="fas fa-users"></i> Manage Users</a></li>
                 <li><a href="statistics.php"><i class="fas fa-chart-bar"></i> Statistics</a></li>
-                <li><a href="gestionTagsCategory.php"><i class="fas fa-tags"></i> Categories/Tags</a></li>
+                <li><a href="affichageCatTag.php"><i class="fas fa-tags"></i> Categories/Tags</a></li>
                 <li><a href="settings.php"><i class="fas fa-cogs"></i> Settings</a></li>
                 <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
             </ul>

@@ -74,7 +74,7 @@
 <body>
     <div class="form-container">
         <h2>Ajouter une Tag</h2>
-        <form action="../views/admin/insertTag.php" method="post">
+        <form action="insertTag.php" method="post">
             <div class="form-group">
                 <label for="tagName">tags</label>
                 <input type="text" id="tagName" name="tagName" placeholder="Entrez le nom de la tag" required>
