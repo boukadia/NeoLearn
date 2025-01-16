@@ -31,7 +31,7 @@ public function addCourse($titre,$description,$content,$photo,$userId,$categoryI
     foreach($as as $tag){
 
         $stmt=$pdo->prepare("INSERT INTO courseTags (tagId,courseId) values(?,?)");
-        $stmt->execute([$courseId,$tag]);
+        $stmt->execute([$tag,$courseId]);
     }
     }
 
