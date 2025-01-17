@@ -1,3 +1,12 @@
+<?php 
+session_start();
+$teacherId=$_SESSION['userId'];
+// echo $teacherId;
+
+require_once($_SERVER['DOCUMENT_ROOT'].'./youdemy/models/course.php');
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,22 +57,18 @@
 
 
 
-        <div class="dashboard-overview">
+<div class="dashboard-overview">
   <h2>Courses Overview</h2>
   <div class="cards">
-    <div class="card">
-      <img src="course-image.jpg" alt="Course Image" class="course-img">
-      <h3>Course Title</h3>
-      <p>Course Description</p>
-      <a href="#" class="btn">Enroll Now</a>
-    </div>
-    <div class="card">
-      <img src="course-image2.jpg" alt="Course Image" class="course-img">
-      <h3>Course Title</h3>
-      <p>Course Description</p>
-      <a href="#" class="btn">Enroll Now</a>
-    </div>
-    <!-- Add more cards as needed -->
+
+<?php
+$course=new Course();
+
+
+$course->getCourses($teacherId)
+?>
+    
+    
   </div>
 </div>
 

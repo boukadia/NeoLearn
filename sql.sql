@@ -85,3 +85,8 @@ END; //
 
 DELIMITER ;
 -- =================================================fin trigger=================================
+
+
+
+
+alter table courses add type varchar(40) not null;

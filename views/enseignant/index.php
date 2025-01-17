@@ -35,11 +35,11 @@ if ($_SESSION['role'] != "enseignant") {
         </div>
         <nav class="sidebar-nav">
             <ul>
-                <li><a href="home.html"><i class="fas fa-home"></i> Accueil</a></li>
-                <li><a href="profile.html"><i class="fas fa-user"></i> Profil</a></li>
-                <li><a href="courses.html"><i class="fas fa-graduation-cap"></i> Cours</a></li>
-                <li><a href="teachers.html"><i class="fas fa-chalkboard-teacher"></i> Enseignants</a></li>
-                <li><a href="contact.html"><i class="fas fa-headset"></i> Contact</a></li>
+                <li><a href="index.php"><i class="fas fa-home"></i> Accueil</a></li>
+                <li><a href="profile.php"><i class="fas fa-user"></i> Profil</a></li>
+                <li><a href="affichageCourses.php"><i class="fas fa-graduation-cap"></i> Cours</a></li>
+                <li><a href="teachers.php"><i class="fas fa-chalkboard-teacher"></i> Enseignants</a></li>
+                <li><a href="contact.php"><i class="fas fa-headset"></i> Contact</a></li>
             </ul>
         </nav>
     </aside>

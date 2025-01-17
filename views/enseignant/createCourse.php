@@ -16,9 +16,13 @@ if (isset($_POST['submit'])) {
     $photo = $_POST['photo'];
     $categoryId = $_POST['categoryId'];
     $tags = $_POST['tags'];
+    $type = $_POST['type'];
     $course = new Course();
-    $course->addCourse($titre, $description, $content, $photo, $userId, $categoryId, $tags);
+    $course->addCourse($titre, $description, $content, $photo, $userId, $categoryId, $tags,$type);
 }
+
+
+
 ?>
 
 
@@ -80,17 +84,17 @@ if (isset($_POST['submit'])) {
                 <div class="textbox">
                     <input type="url" name="content" placeholder="URL du contenu" required>
                 </div>
-                <div class="textbox">
-                    <input type="url" name="photo" placeholder="URL du contenu" required>
-                </div>
-
-
                 <!-- <div class="textbox">
-        <input type="file" name="photo" accept="image/*" required>
-      </div> -->
+                    <input type="url" name="photo" placeholder="URL du contenu" required>
+                </div> -->
+
 
                 <div class="textbox">
-                    <select name="content_type" required>
+        <input type="file" name="photo" accept="image/*" required>
+      </div>
+
+                <div class="textbox">
+                    <select name="type" required>
                         <option value="">Selectionner le type de contenu</option>
                         <option value="article">Article</option>
                         <option value="video">Video</option>
