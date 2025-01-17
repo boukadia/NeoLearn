@@ -35,7 +35,7 @@ if ($_SESSION['role'] != "admin") {
         <nav class="sidebar-nav">
             <ul>
                 <li><a href="dashboard.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                <li><a href="gestionCourses.php"><i class="fas fa-graduation-cap"></i> Manage Courses</a></li>
+                <li><a href="affichageCourses.php"><i class="fas fa-graduation-cap"></i> Manage Courses</a></li>
                 <li><a href="../../models/gestionUser.php"><i class="fas fa-users"></i> Manage Users</a></li>
                 <li><a href="statistics.php"><i class="fas fa-chart-bar"></i> Statistics</a></li>
                 <li><a href="affichageCatTag.php"><i class="fas fa-tags"></i> Categories/Tags</a></li>

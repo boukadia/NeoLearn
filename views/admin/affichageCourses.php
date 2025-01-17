@@ -1,8 +1,10 @@
 <?php
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/user.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'./youdemy/models/course.php');
 
 session_start();
+$teacherId=$_SESSION['userId'];
 if ($_SESSION['role'] != "admin") {
     header("location : ../login.html");
     exit();
@@ -11,13 +13,9 @@ if ($_SESSION['role'] != "admin") {
 }
 
 
-?>
-<?php 
-session_start();
-$teacherId=$_SESSION['userId'];
+// session_start();
 // echo $teacherId;
 
-require_once($_SERVER['DOCUMENT_ROOT'].'./youdemy/models/course.php');
 ?>
 
 
@@ -36,21 +34,22 @@ require_once($_SERVER['DOCUMENT_ROOT'].'./youdemy/models/course.php');
 
 
 
-    <!-- Sidebar -->
-    <aside class="sidebar">
+<div class="sidebar">
         <div class="sidebar-header">
-            <h2>Educa</h2>
+            <h2 class="logo">Youdemy</h2>
         </div>
         <nav class="sidebar-nav">
             <ul>
-                <li><a href="index.php"><i class="fas fa-home"></i> Accueil</a></li>
-                <!-- <li><a href="profile.php"><i class="fas fa-user"></i> Profil</a></li> -->
-                <li><a href="affichageCourses.php"><i class="fas fa-graduation-cap"></i> Cours</a></li>
-                
-                <!-- <li><a href="contact.php"><i class="fas fa-headset"></i> Contact</a></li> -->
+                <li><a href="dashboard.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="affichageCourses.php"><i class="fas fa-graduation-cap"></i> Manage Courses</a></li>
+                <li><a href="../../models/gestionUser.php"><i class="fas fa-users"></i> Manage Users</a></li>
+                <li><a href="statistics.php"><i class="fas fa-chart-bar"></i> Statistics</a></li>
+                <li><a href="affichageCatTag.php"><i class="fas fa-tags"></i> Categories/Tags</a></li>
+                <li><a href="affichageUsers.php"><i class="fas fa-chalkboard-teacher"></i> Enseignants</a></li>
+                <li><a href="../../models/logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
             </ul>
         </nav>
-    </aside>
+    </div>
 
 
     <section class="button-section">
@@ -77,21 +76,36 @@ require_once($_SERVER['DOCUMENT_ROOT'].'./youdemy/models/course.php');
             </div>
         </header>
         
-        
-        <div class="dashboard-overview">
-          <h2>Courses Overview</h2>
-          <div class="cards">
+          <!------------------------ Course Management ---------------------------------->
+          <section class="course-management">
+            <h2>Manage Courses</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Course Title</th>
+                        <th>Instructor</th>
+                        <th>Enrolled Students</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php
+                    
+                    $course=new Course();
+                    
+                    
+                    $course->getAllCourses()
+                    ?>
+              
+                </tbody>
+            </table>
+        </section>
             
-            <?php
-$course=new Course();
-
-
-$course->getAllCourses()
-?>
     
     
-  </div>
-</div>
+  
+
 </main>main
 
 
