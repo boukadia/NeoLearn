@@ -62,7 +62,6 @@ if ($_SESSION['role'] != "admin") {
 
 <!-- Section for Add Tag and Add Category buttons -->
 <section class="button-section">
-    <a ></a>
     <a href="../../models/addCategory.php" class="add-category-button"><i class="fas fa-folder-plus"></i> Add Category</a>
     <a href="../../models/addCategory.php"  class="add-tag-button"><i class="fas fa-tag"></i> Add Tag</a>
 </section>

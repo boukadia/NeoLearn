@@ -29,14 +29,22 @@ require_once($_SERVER['DOCUMENT_ROOT'].'./youdemy/models/course.php');
         </div>
         <nav class="sidebar-nav">
             <ul>
-                <li><a href="home.php"><i class="fas fa-home"></i> Accueil</a></li>
-                <li><a href="profile.php"><i class="fas fa-user"></i> Profil</a></li>
-                <li><a href="courses.php"><i class="fas fa-graduation-cap"></i> Cours</a></li>
+                <li><a href="index.php"><i class="fas fa-home"></i> Accueil</a></li>
+                <!-- <li><a href="profile.php"><i class="fas fa-user"></i> Profil</a></li> -->
+                <li><a href="affichageCourses.php"><i class="fas fa-graduation-cap"></i> Cours</a></li>
                 
-                <li><a href="contact.php"><i class="fas fa-headset"></i> Contact</a></li>
+                <!-- <li><a href="contact.php"><i class="fas fa-headset"></i> Contact</a></li> -->
             </ul>
         </nav>
     </aside>
+
+
+    <section class="button-section">
+    <a href="createCourse.php" class="add-category-button"><i class="fas fa-folder-plus"></i> Add courses</a>
+</section>
+
+
+
 
     <!-- Main Content -->
     <main class="main-content">
@@ -47,21 +55,20 @@ require_once($_SERVER['DOCUMENT_ROOT'].'./youdemy/models/course.php');
                 <div class="profile">
                     <img src="images/teacher-pic.jpg" alt="Professeur John Doe" class="profile-img">
                     <div class="profile-info">
-                        <p class="role">Enseignant - Développement Web</p>
+                        <p class="role">Enseignant - Developpement Web</p>
                         <p class="experience"><i class="fas fa-briefcase"></i> 5 ans d'expérience</p>
                         <a href="mailto:teacher@example.com" class="contact-btn">Contacter</a>
                     </div>
                 </div>
             </div>
         </header>
-
-
-
-<div class="dashboard-overview">
-  <h2>Courses Overview</h2>
-  <div class="cards">
-
-<?php
+        
+        
+        <div class="dashboard-overview">
+          <h2>Courses Overview</h2>
+          <div class="cards">
+            
+            <?php
 $course=new Course();
 
 
@@ -71,6 +78,7 @@ $course->getCourses($teacherId)
     
   </div>
 </div>
+</main>main
 
 
 </body>

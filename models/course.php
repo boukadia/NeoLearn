@@ -37,6 +37,7 @@ private $pdo;
             $stmt = $pdo->prepare("INSERT INTO courseTags (tagId,courseId) values(?,?)");
             $stmt->execute([$tag, $courseId]);
         }
+        header("location:./affichageCourses.php");
     }
 
 
@@ -73,8 +74,8 @@ private $pdo;
         // courses(titre,content,photo,description)
         $connect=new Database();
         $this->pdo=$connect->connect();
-        $stmt=$this->pdo->prepare("SELECT * FROM courses where teacherId=?");
-        $stmt->execute([$teacherId]);
+        $stmt=$this->pdo->prepare("SELECT * FROM courses where teacherId=? && courseStatus=?");
+        $stmt->execute([$teacherId,"active"]);
         // echo" <pre>";
         while($courses=$stmt->fetch(PDO::FETCH_ASSOC)){
             echo"
@@ -82,11 +83,57 @@ private $pdo;
                 <h3>".$courses['titre']."</h3>
                 <img src='../../assests/images/".$courses['photo']."' alt=''>
                 <p>".$courses['description']." </p>
-                <a href='#' class='btn'>Enroll Now</a>
+                <a href='../../models/deleteCourse.php?courseId=".$courses['courseId']."' class='btn'>delete</a>
+                <a href='' class='btn'>update</a>
     </div>
             ";
         }
     } 
+
+
+
+    public function getAllCourses(){
+        // courses(titre,content,photo,description)
+        $connect=new Database();
+        $this->pdo=$connect->connect();
+        $stmt=$this->pdo->prepare("SELECT * FROM courses ");
+        $stmt->execute();
+        // echo" <pre>";
+        while($courses=$stmt->fetch(PDO::FETCH_ASSOC)){
+            echo"
+                <div class='card'>
+                <h3>".$courses['titre']."</h3>
+                <img src='../../assests/images/".$courses['photo']."' alt=''>
+                <p>".$courses['description']." </p>
+                <p>".$courses['courseStatus']." </p>
+                <a href='../../models/softDeletCourse.php?courseId=".$courses['courseId']."' class='btn'>delete</a>
+                <a href='' class='btn'>update</a>
+    </div>
+            ";
+        }
+    } 
+
+//    ======================soft delete=================================
+
+    public function softDeleteCourse($courseId){
+        $connect=new Database();
+        $this->pdo=$connect->connect();
+        $stmt=$this->pdo->prepare("UPDATE courses SET courseStatus=? where courseId=? ");
+        $stmt->execute(["desactive",$courseId]);
+
+
+
+    }
+
+    public function deleteCourse($courseId){
+        $connect=new Database();
+        $this->pdo=$connect->connect();
+        $stmt=$this->pdo->prepare("DELETE FROM courses where courseId=? ");
+        $stmt->execute([$courseId]);
+
+
+
+    }
 }
 
 

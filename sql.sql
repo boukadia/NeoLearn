@@ -90,3 +90,4 @@ DELIMITER ;
 
 
 alter table courses add type varchar(40) not null;
+alter table courses add courseStatus ENUM('active','desactive') DEFAULT 'active';
