@@ -113,7 +113,7 @@ private $pdo;
         }
     } 
 
-//    ======================soft delete=================================
+//    ======================soft delete pour admin=================================
 
     public function softDeleteCourse($courseId){
         $connect=new Database();
@@ -128,6 +128,11 @@ private $pdo;
     public function deleteCourse($courseId){
         $connect=new Database();
         $this->pdo=$connect->connect();
+        $stmt=$this->pdo->prepare("DELETE FROM courseTags where courseId=? ");
+        $stmt->execute([$courseId]);
+
+       
+
         $stmt=$this->pdo->prepare("DELETE FROM courses where courseId=? ");
         $stmt->execute([$courseId]);
 
