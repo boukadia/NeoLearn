@@ -44,6 +44,7 @@ if ($_SESSION['role'] != "enseignant") {
                 <!-- <li><a href="profile.php"><i class="fas fa-user"></i> Profil</a></li> -->
                 <li><a href="affichageCourses.php"><i class="fas fa-graduation-cap"></i> Cours</a></li>
                 <li><a href="teachers.php"><i class="fas fa-chalkboard-teacher"></i> Enseignants</a></li>
+                <li><a href="../logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
                 <!-- <li><a href="contact.php"><i class="fas fa-headset"></i> Contact</a></li> -->
             </ul>
         </nav>

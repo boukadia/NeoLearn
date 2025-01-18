@@ -40,7 +40,7 @@ if ($_SESSION['role'] != "admin") {
                 <li><a href="statistics.php"><i class="fas fa-chart-bar"></i> Statistics</a></li>
                 <li><a href="affichageCatTag.php"><i class="fas fa-tags"></i> Categories/Tags</a></li>
                 <li><a href="affichageUsers.php"><i class="fas fa-chalkboard-teacher"></i> Enseignants</a></li>
-                <li><a href="../../models/logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                <li><a href="../logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
             </ul>
         </nav>
     </div>
@@ -128,15 +128,7 @@ if ($_SESSION['role'] != "admin") {
 
 
 
-        <section class="recent-activity">
-            <h2>Recent Activity</h2>
-            <ul>
-                <li><i class="fas fa-user-plus"></i> New student registered: <strong>Mark Smith</strong></li>
-                <li><i class="fas fa-user-plus"></i> New teacher added: <strong>Sarah Lee</strong></li>
-                <li><i class="fas fa-book"></i> New course added: <strong>Advanced JavaScript</strong></li>
-                <li><i class="fas fa-users"></i> 10 students enrolled in "HTML for Beginners"</li>
-            </ul>
-        </section>
+       
 
     </div>
 
