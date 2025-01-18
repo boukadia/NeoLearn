@@ -69,6 +69,8 @@ class Course
       
         ";
         }
+        
+
     }
     public function getCourses($teacherId)
     {
@@ -148,4 +150,13 @@ class Course
       return $stmt->fetch(PDO::FETCH_ASSOC);
        
     }
+
+
+  
 }
+
+
+
+
+
+

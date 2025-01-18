@@ -84,9 +84,9 @@ $tag->getTags();
 echo"     <div class='textbox'>
 <input type='text' value='".$courses['description']."' name='description' placeholder='ecrire de la description' required>
 </div>
-';
+
 <div class='textbox'>
-    <input type='url' name='content' placeholder='URL du contenu' required>
+    <input type='url' value='".$courses['content']."' name='content' placeholder='URL du contenu' required>
 </div>
 
 

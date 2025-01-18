@@ -84,7 +84,7 @@ private $pdo;
                       
                         <td><span class='status active'>".$user['status']."</span></td>
                         <td><a href='../../models/deleteUser.php?userId=".$user['userId']."' class='edit-btn'>delete</a>
-                        <a href='../../models/deleteUser.php?userId=".$user['userId']."' class='edit-btn'>switch</a>
+                        <a href='../../models/switch.php?userId=".$user['userId']."' class='edit-btn'>switch</a>
                         </td>
                     </tr>
                 </tbody>
@@ -95,6 +95,16 @@ private $pdo;
     }
 }
 
+
+
+public function switchActive($userId)
+{ $connect=new Database();
+    $this->pdo=$connect->connect();
+    $stmt = $this->pdo->prepare("UPDATE users SET status = CASE 
+    WHEN status = 'pending' THEN 'active' ELSE 'pending' END WHERE userId = ?");
+   
+    return  $stmt->execute([$userId]);
+}
 
 }
 
