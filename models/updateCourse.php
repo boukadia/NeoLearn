@@ -3,6 +3,12 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/course.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/user.php');
 session_start();
+$courseId=$_GET['courseId'];
+$connect=new Database();
+       $pdo= $connect->connect();
+       $stmt=$pdo->prepare("SELECT * FROM courses where courseId=? ");
+       $stmt->execute([$courseId]);
+       $courses=$stmt->fetch(PDO::FETCH_ASSOC);
 if ($_SESSION['role'] != "enseignant") {
     header("location : ../login.html");
     exit();
@@ -18,7 +24,7 @@ if (isset($_POST['submit'])) {
     $tags = $_POST['tags'];
     $type = $_POST['type'];
     $course = new Course();
-    $course->addCourse($titre, $description, $content, $photo, $userId, $categoryId, $tags,$type);
+    $course->updateCourses($courseId,$titre, $description, $content, $photo, $userId, $categoryId, $tags,$type);
 }
 
 
@@ -32,7 +38,7 @@ if (isset($_POST['submit'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../assests/css/style.css">
+    <link rel="stylesheet" href="../assests/css/style.css">
     <title>Document</title>
 </head>
 
@@ -43,9 +49,8 @@ if (isset($_POST['submit'])) {
             
             <form action="" method="POST">
                 <?php 
-                $courseId=$_GET['courseId'];
-                $course=new course();
-                $courses = $course->updateCourses(courseId: $courseId);
+                // $course=new course();
+                // $courses = $course->updateCourses(courseId: $courseId);
                 echo "
 
                 <div class='textbox'>

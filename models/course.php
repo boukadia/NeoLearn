@@ -142,12 +142,21 @@ class Course
     }
 
 
-    public function updateCourses($courseId){
+    public function updateCourses($courseId,$titre, $description, $content, $photo, $userId, $categoryId, $tags,$type){
         $connect=new Database();
        $this->pdo= $connect->connect();
-       $stmt=$this->pdo->prepare("SELECT * FROM courses where courseId=? ");
+       $stmt=$this->pdo->prepare("delete from courseTags where courseId=?");
        $stmt->execute([$courseId]);
-      return $stmt->fetch(PDO::FETCH_ASSOC);
+       $stmt=$this->pdo->prepare("UPDATE   courses SET titre=?,description=?,content=?, photo=?, teacherId=?, categoryId=?, type=? where courseId=? ");
+       $stmt->execute([$titre, $description, $content, $photo, $userId, $categoryId,$type,$courseId]);
+       $tagss=$tags;
+       foreach ($tagss as $tag) {
+
+        $stmt = $this->pdo->prepare("INSERT INTO courseTags (tagId,courseId) values(?,?)");
+        $stmt->execute([$tag, $courseId]);
+    }
+    header("location:../views/enseignant/affichageCourses.php");
+      
        
     }
 
