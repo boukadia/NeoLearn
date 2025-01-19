@@ -166,8 +166,21 @@ class Course
         $connect = new Database();
 
         $this->pdo = $connect->connect();
-        $stmt = $this->pdo->prepare("INSERT INTO enrollments(studentId,courseId) VALUES(?,?)");
-        $stmt->execute([$studentId, $courseId]);
+        $stmt=$this->pdo->prepare("SELECT * FROM enrollments");
+        $stmt->execute();
+        $courses=$stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach($courses as $course){
+            if($courseId==$course['courseId']){
+            echo"you are   already enroll in this course";
+            return $course['courseId'];
+        }
+    }
+       $stmt = $this->pdo->prepare("INSERT INTO enrollments(studentId,courseId) VALUES(?,?)");
+    $stmt->execute([$studentId, $courseId]); 
+    
+        
+        
+        
     }
 
     //    ======================soft delete pour admin=================================
