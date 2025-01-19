@@ -1,6 +1,7 @@
 <?php
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/user.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/course.php');
 session_start();
 
 
@@ -12,6 +13,8 @@ if ($_SESSION['role'] !== "student") {
 else {
    
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -39,11 +42,13 @@ else {
         </div>
         <nav class="sidebar-nav">
             <ul>
-                <li><a href="home.html"><i class="fas fa-home"></i> Accueil</a></li>
-                <li><a href="profile.html"><i class="fas fa-user"></i> Profil</a></li>
-                <li><a href="courses.html"><i class="fas fa-graduation-cap"></i> Cours</a></li>
-                <li><a href="teachers.html"><i class="fas fa-chalkboard-teacher"></i> Enseignants</a></li>
-                <li><a href="contact.html"><i class="fas fa-headset"></i> Contact</a></li>
+                <li><a href="index.php"><i class="fas fa-home"></i> Accueil</a></li>
+                <li><a href="profile.php"><i class="fas fa-user"></i> Profil</a></li>
+                <li><a href="myCourses.php"><i class="fas fa-graduation-cap"></i> Cours</a></li>
+                <li><a href="../logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+
+                <!-- <li><a href="teachers.php"><i class="fas fa-chalkboard-teacher"></i> Enseignants</a></li>
+                <li><a href="contact.php"><i class="fas fa-headset"></i> Contact</a></li> -->
             </ul>
         </nav>
     </aside>
@@ -66,27 +71,23 @@ else {
         </header>
 
         <!-- Mes Cours -->
-        <section class="my-courses">
+        <section  class="my-courses">
             <h2>Mes Cours</h2>
-            <div class="courses-list">
-                <div class="course-item">
+            <div style='flex-wrap:wrap' class="courses-list">
+
+<?php
+$courses=new Course();
+$courses->getAllCourses($_SESSION['role']);
+?>
+                <!-- <div class="course-item">
                     <img src="images/course-html.jpg" alt="Cours HTML">
                     <h3>Développement HTML pour Débutants</h3>
                     <p>Apprenez les bases du HTML pour créer des pages web.</p>
                     <a href="course-detail.html" class="btn">Voir le cours</a>
-                </div>
-                <div class="course-item">
-                    <img src="images/course-css.jpg" alt="Cours CSS">
-                    <h3>CSS Avancé - Design Web</h3>
-                    <p>Transformez votre HTML avec des styles CSS modernes et responsives.</p>
-                    <a href="course-detail.html" class="btn">Voir le cours</a>
-                </div>
-                <div class="course-item">
-                    <img src="images/course-js.jpg" alt="Cours JavaScript">
-                    <h3>JavaScript pour Développeurs Web</h3>
-                    <p>Apprenez à rendre vos pages interactives avec JavaScript.</p>
-                    <a href="course-detail.html" class="btn">Voir le cours</a>
-                </div>
+                </div> -->
+               
+
+
             </div>
         </section>
 

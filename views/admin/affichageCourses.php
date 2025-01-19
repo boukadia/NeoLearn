@@ -46,7 +46,7 @@ if ($_SESSION['role'] != "admin") {
                 <li><a href="statistics.php"><i class="fas fa-chart-bar"></i> Statistics</a></li>
                 <li><a href="affichageCatTag.php"><i class="fas fa-tags"></i> Categories/Tags</a></li>
                 <li><a href="affichageUsers.php"><i class="fas fa-chalkboard-teacher"></i> Enseignants</a></li>
-                <li><a href="../../models/logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                <li><a href="../logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
             </ul>
         </nav>
     </div>
@@ -95,7 +95,7 @@ if ($_SESSION['role'] != "admin") {
                     $course=new Course();
                     
                     
-                    $course->getAllCourses()
+                    $course->getAllCourses($_SESSION['role'])
                     ?>
               
                 </tbody>

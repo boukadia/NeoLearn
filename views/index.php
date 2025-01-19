@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Course Display</title>
-    <link rel="stylesheet" href="../../assests/css/style.css">
+    <link rel="stylesheet" href="../assests/css/style.css">
 </head>
 
 <body>
@@ -16,7 +16,7 @@
         <nav class="sidebar-nav">
             <ul>
                 <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
-                <li><a href="#"><i class="fas fa-book"></i> Courses</a></li>
+                <li><a href=""><i class="fas fa-book"></i> Courses</a></li>
                 <li><a href="#"><i class="fas fa-user"></i> Profile</a></li>
                 <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
             </ul>
