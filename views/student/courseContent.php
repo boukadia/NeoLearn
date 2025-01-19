@@ -172,7 +172,22 @@
                 <p class="course-description">
                     Découvrez les fondamentaux de JavaScript
                 </p>
-               
+                <!-- 
+                <div class="course-meta">
+                    <div class="meta-item">
+                        <span>📚 15 leçons</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>⏱️ 2h30 de contenu</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>🎯 Niveau débutant</span>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div> -->
 
                 <a href="#" class="cta-button">Continuer le cours</a>
             </div>

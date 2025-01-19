@@ -72,7 +72,7 @@ class Course
     }
     public function getCourses($teacherId)
     {
-        // courses(titre,content,photo,description)
+ 
         $connect = new Database();
         $this->pdo = $connect->connect();
         $stmt = $this->pdo->prepare("SELECT * FROM courses where teacherId=? ");
@@ -96,7 +96,7 @@ class Course
 
     public function getAllCourses($userRole)
     {
-        // courses(titre,content,photo,description)
+        
         $connect = new Database();
         $this->pdo = $connect->connect();
         $stmt = $this->pdo->prepare("SELECT users.userName,courses.courseId,courses.courseStatus,courses.titre,courses.description FROM courses  INNER JOIN users ON users.userId=courses.teacherId");
@@ -120,7 +120,7 @@ class Course
         } else if ($userRole == 'student') {
             $stmt = $this->pdo->prepare("SELECT users.userId,users.userName,courses.courseId,courses.courseStatus,courses.titre,courses.description,courses.photo FROM courses  INNER JOIN users ON users.userId=courses.teacherId && courseStatus='active'");
             $stmt->execute();
-            // $course = $stmt->fetchAll();
+        
             while ($course = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 if ($course['courseStatus'] == 'active') {
 
@@ -137,7 +137,54 @@ class Course
                 }
             }
         }
+        else{
+            $stmt = $this->pdo->prepare("SELECT users.userId,users.userName,courses.courseId,courses.courseStatus,courses.titre,courses.description,courses.photo FROM courses  INNER JOIN users ON users.userId=courses.teacherId && courseStatus='active'");
+            $stmt->execute();
+            
+            while ($course = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                if ($course['courseStatus'] == 'active') {
+                    echo "
+          <div class='card'>
+            <img src='../assests/images/" . $course['photo'] . "' alt='Course 1'>
+            <h3>" . $course['titre'] . "</h3>
+                    <p>" . $course['description'] . "</p>
+                    <p style='text-align:left;color:red'>Pr." . $course['userName'] . "</p>
+                    <a href='../../models/addMyCourse.php?userId=" . $course['userId'] . "&&courseId=" . $course['courseId'] . "' class='btn'>s'inscrire</a>
+                            </div> ";
+        }
+        
+    }}}
+
+
+
+
+    public function rechercheCourse($mots){
+        $connect=new Database();
+
+        $this->pdo=$connect->connect();
+        $stmt = $this->pdo->prepare("SELECT users.userId,users.userName,courses.courseId,courses.courseStatus,courses.titre,courses.description,courses.photo FROM courses  INNER JOIN users ON (users.userId=courses.teacherId && courseStatus='active') where courses.titre like ?");
+         $mot = "%".$mots."%";
+        $stmt->execute(params:[$mot] );
+        while ($course = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            if ($course['courseStatus'] == 'active') {
+
+
+                echo "
+               
+            <div style='background-color:#ffcc80;flex-wrap:wrap' class='course-item'>
+                <img src='../assests/images/" . $course['photo'] . "' alt='Cours HTML'>
+                <h3>" . $course['titre'] . "</h3>
+                <p>" . $course['description'] . "</p>
+                <p style='text-align:left;color:red'>Pr." . $course['userName'] . "</p>
+                <a href='../../models/addMyCourse.php?userId=" . $course['userId'] . "&&courseId=" . $course['courseId'] . "' class='btn'>s'inscrire</a>
+            </div>
+            ";
+            }
+
     }
+}
+
+
 
     public function getMyCourses($studentId)
     {
