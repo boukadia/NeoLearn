@@ -5,7 +5,11 @@ require_once($_SERVER['DOCUMENT_ROOT'].'./youdemy/models/course.php');
 
 session_start();
 $teacherId=$_SESSION['userId'];
+
+session_start();
 if ($_SESSION['role'] != "admin") {
+    session_destroy();
+
     header("location : ../login.html");
     exit();
 } else {

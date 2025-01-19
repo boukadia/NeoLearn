@@ -3,7 +3,8 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/course.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/user.php');
 session_start();
-if ($_SESSION['role'] != "enseignant") {
+if ($_SESSION['role'] != "enseignant" ||$_SESSION['status']=="pending") {
+    session_destroy();
     header("location : ../login.html");
     exit();
 } else {

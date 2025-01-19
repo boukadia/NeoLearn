@@ -146,13 +146,16 @@ class Course
 
 
         $stmt = $this->pdo->prepare("SELECT courses.titre,courses.content,courses.description,courses.photo,users.userName,
-        enrollments.studentId,enrollments.courseId
+        enrollments.studentId,enrollments.courseId, category.categoryName
          FROM enrollments INNER JOIN courses ON enrollments.courseId=courses.courseId 
-        inner JOIN users ON enrollments.studentId=? ");
+        inner JOIN users ON enrollments.studentId=users.userId
+         inner JOIN category ON courses.categoryId = category.categoryId
+    
+     WHERE enrollments.studentId = ?;");
         $stmt->execute([$studentId]);
 
 
-        print_r($stmt->fetchAll(PDO::FETCH_ASSOC));
+        return ($stmt->fetchAll(PDO::FETCH_ASSOC));
 
 
 

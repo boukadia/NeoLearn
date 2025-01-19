@@ -1,3 +1,22 @@
+
+<?php
+session_start();
+if ($_SESSION['role']!='student'){
+    session_destroy();
+header("location: ../login.html");
+exit();
+}
+else{
+
+}
+require_once($_SERVER['DOCUMENT_ROOT'].'/youdemy/models/course.php');
+$studentId=$_SESSION['userId'];
+$myCourses=new Course();
+
+$courses=$myCourses->getMyCourses($studentId)
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,31 +59,19 @@
 
         <section class="dashboard-overview">
             <h2>Courses Overview</h2>
-            <div class="cards">
-                <div class="card">
-                    <img src="course1.jpg" alt="Course 1">
-                    <h3>Web Development</h3>
-                    <p>Learn the basics of HTML, CSS, and JavaScript.</p>
-                    <a href="#" class="btn">View Details</a>
+            <div class='cards'>
+            <?php
+            foreach($courses as $course) 
+            echo"
+                <div class='card'>
+                    <img src='../../assests/images/".$course['photo']."' alt='Course 1'>
+                    <h3>".$course['titre']."</h3>
+                    <p>".$course['description']."</p>
+                    <a href='#' class='btn'>View Details</a>
                 </div>
-                <div class="card">
-                    <img src="course2.jpg" alt="Course 2">
-                    <h3>Data Science</h3>
-                    <p>Introduction to data analysis and machine learning.</p>
-                    <a href="#" class="btn">View Details</a>
-                </div>
-                <div class="card">
-                    <img src="course3.jpg" alt="Course 3">
-                    <h3>UI/UX Design</h3>
-                    <p>Design engaging and user-friendly interfaces.</p>
-                    <a href="#" class="btn">View Details</a>
-                </div>
-                <div class="card">
-                    <img src="course4.jpg" alt="Course 4">
-                    <h3>Mobile Development</h3>
-                    <p>Create apps for Android and iOS platforms.</p>
-                    <a href="#" class="btn">View Details</a>
-                </div>
+              
+                ";
+                ?>
             </div>
         </section>
     </div>

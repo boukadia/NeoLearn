@@ -44,6 +44,7 @@ class User
             $_SESSION['userId'] = $user['userId'];
             $_SESSION['userName'] = $user['username'];
             $_SESSION['email'] = $user['email'];
+            $_SESSION['status'] = $user['status'];
             $_SESSION['role'] = $user['role'];
             if ($_SESSION['role'] == "student") {
 
@@ -68,7 +69,7 @@ class User
 
         // $hashPassword = password_hash($this->password, PASSWORD_DEFAULT);
 
-        $stmt = $this->pdo->prepare("SELECT * FROM users");
+        $stmt = $this->pdo->prepare("SELECT * FROM users where role='enseignant' ");
         $stmt->execute();
         while ($user = $stmt->fetch(PDO::FETCH_ASSOC)) {
             echo "

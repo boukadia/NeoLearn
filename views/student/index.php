@@ -6,12 +6,10 @@ session_start();
 
 
 if ($_SESSION['role'] !== "student") {
-    var_dump($_SESSION['role']);
+    session_destroy();
     header("Location: ../login.html");
     exit();
-}
-else {
-   
+} else {
 }
 
 
@@ -71,21 +69,21 @@ else {
         </header>
 
         <!-- Mes Cours -->
-        <section  class="my-courses">
+        <section class="my-courses">
             <h2>Mes Cours</h2>
             <div style='flex-wrap:wrap' class="courses-list">
 
-<?php
-$courses=new Course();
-$courses->getAllCourses($_SESSION['role']);
-?>
+                <?php
+                $courses = new Course();
+                $courses->getAllCourses($_SESSION['role']);
+                ?>
                 <!-- <div class="course-item">
                     <img src="images/course-html.jpg" alt="Cours HTML">
                     <h3>Développement HTML pour Débutants</h3>
                     <p>Apprenez les bases du HTML pour créer des pages web.</p>
                     <a href="course-detail.html" class="btn">Voir le cours</a>
                 </div> -->
-               
+
 
 
             </div>

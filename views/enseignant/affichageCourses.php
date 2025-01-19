@@ -1,7 +1,13 @@
 <?php 
 session_start();
 $teacherId=$_SESSION['userId'];
-// echo $teacherId;
+if ($_SESSION['role'] != "enseignant" ||$_SESSION['status']=="pending") {
+    session_destroy();
+    header("location : ../login.html");
+    exit();
+} else {
+};
+
 
 require_once($_SERVER['DOCUMENT_ROOT'].'./youdemy/models/course.php');
 ?>
