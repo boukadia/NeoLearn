@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Course Display</title>
     <link rel="stylesheet" href="../../assests/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
 </head>
 
 <body>
@@ -15,10 +16,10 @@
         </div>
         <nav class="sidebar-nav">
             <ul>
-                <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
-                <li><a href="#"><i class="fas fa-book"></i> Courses</a></li>
-                <li><a href="#"><i class="fas fa-user"></i> Profile</a></li>
-                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+            <li><a href="index.php"><i class="fas fa-home"></i> Accueil</a></li>
+                <li><a href="profile.php"><i class="fas fa-user"></i> Profil</a></li>
+                <li><a href="myCourses.php"><i class="fas fa-graduation-cap"></i> Cours</a></li>
+                <li><a href="../logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
             </ul>
         </nav>
     </div>

@@ -69,8 +69,6 @@ class Course
       
         ";
         }
-        
-
     }
     public function getCourses($teacherId)
     {
@@ -88,7 +86,7 @@ class Course
                 <p>" . $courses['description'] . " </p>
                 <p style='background-color:#69c869 ;padding:10px;border-radius:10px'>" . $courses['courseStatus'] . " </p>
                 <a href='../../models/deleteCourse.php?courseId=" . $courses['courseId'] . "' class='btn'>delete</a>
-                <a href='../../models/updateCourse.php?courseId=".$courses['courseId']." ' class='btn'>update</a>
+                <a href='../../models/updateCourse.php?courseId=" . $courses['courseId'] . " ' class='btn'>update</a>
     </div>
             ";
         }
@@ -103,44 +101,73 @@ class Course
         $this->pdo = $connect->connect();
         $stmt = $this->pdo->prepare("SELECT users.userName,courses.courseId,courses.courseStatus,courses.titre,courses.description FROM courses  INNER JOIN users ON users.userId=courses.teacherId");
         $stmt->execute();
-        if($userRole=='admin'){
+        if ($userRole == 'admin') {
 
-            echo" <pre>";
+            echo " <pre>";
             print_r($courses = $stmt->fetch(PDO::FETCH_ASSOC));
             while ($courses = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 echo "
                 <tr>
-                <td>".$courses['titre']."</td>
-                <td>".$courses['userName']."</td>
-                <td>".$courses['description']."</td>
-                <td><span class='status active'>".$courses['courseStatus']."</span></td>
+                <td>" . $courses['titre'] . "</td>
+                <td>" . $courses['userName'] . "</td>
+                <td>" . $courses['description'] . "</td>
+                <td><span class='status active'>" . $courses['courseStatus'] . "</span></td>
                 <td> <a style=text-decoration:none' href='../../models/softDeletCourse.php?courseId=" . $courses['courseId'] . "' class='btn'>delete</a>
-                <a href='../../models/switch.php?courseId=".$courses['courseId']."' class='btn'>switch</a></td>
+                <a href='../../models/switch.php?courseId=" . $courses['courseId'] . "' class='btn'>switch</a></td>
                 </tr>
                 ";
             }
-        }
-
-        else if ($userRole=='student'){
-            $stmt = $this->pdo->prepare("SELECT users.userName,courses.courseId,courses.courseStatus,courses.titre,courses.description,courses.photo FROM courses  INNER JOIN users ON users.userId=courses.teacherId && courseStatus='active'");
-        $stmt->execute();
+        } else if ($userRole == 'student') {
+            $stmt = $this->pdo->prepare("SELECT users.userId,users.userName,courses.courseId,courses.courseStatus,courses.titre,courses.description,courses.photo FROM courses  INNER JOIN users ON users.userId=courses.teacherId && courseStatus='active'");
+            $stmt->execute();
             // $course = $stmt->fetchAll();
-            while ($course = $stmt->fetch(PDO::FETCH_ASSOC) ) {
-                if($course['courseStatus']=='active'){
+            while ($course = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                if ($course['courseStatus'] == 'active') {
 
-                
-                echo "
+
+                    echo "
                 <div style='background-color:#ffcc80;flex-wrap:wrap' class='course-item'>
-                    <img src='../../assests/images/".$course['photo']."' alt='Cours HTML'>
-                    <h3>".$course['titre']."</h3>
-                    <p>".$course['description']."</p>
-                    <p style='text-align:left;color:red'>Pr.".$course['userName']."</p>
-                    <a href='course-detail.html' class='btn'>s'inscrire</a>
+                    <img src='../../assests/images/" . $course['photo'] . "' alt='Cours HTML'>
+                    <h3>" . $course['titre'] . "</h3>
+                    <p>" . $course['description'] . "</p>
+                    <p style='text-align:left;color:red'>Pr." . $course['userName'] . "</p>
+                    <a href='../../models/addMyCourse.php?userId=" . $course['userId'] . "&&courseId=" . $course['courseId'] . "' class='btn'>s'inscrire</a>
                 </div>
                 ";
-            }
+                }
             }
         }
+    }
+
+    public function getMyCourses($studentId)
+    {
+        $connect = new Database();
+        $this->pdo = $connect->connect();
+
+
+        $stmt = $this->pdo->prepare("SELECT courses.titre,courses.content,courses.description,courses.photo,users.userName,
+        enrollments.studentId,enrollments.courseId
+         FROM enrollments INNER JOIN courses ON enrollments.courseId=courses.courseId 
+        inner JOIN users ON enrollments.studentId=? ");
+        $stmt->execute([$studentId]);
+
+
+        print_r($stmt->fetchAll(PDO::FETCH_ASSOC));
+
+
+
+        // var_dump($user);
+        // $_SESSION[''];
+
+
+    }
+    public function enrollments($studentId, $courseId)
+    {
+        $connect = new Database();
+
+        $this->pdo = $connect->connect();
+        $stmt = $this->pdo->prepare("INSERT INTO enrollments(studentId,courseId) VALUES(?,?)");
+        $stmt->execute([$studentId, $courseId]);
     }
 
     //    ======================soft delete pour admin=================================
@@ -152,8 +179,8 @@ class Course
         $stmt = $this->pdo->prepare("UPDATE courses SET courseStatus=? where courseId=? ");
         $stmt->execute(["desactive", $courseId]);
     }
-// ====================================================
-// ====================================================
+    // ====================================================
+    // ====================================================
 
     public function deleteCourse($courseId)
     {
@@ -167,38 +194,30 @@ class Course
     }
 
 
-    public function updateCourses($courseId,$titre, $description, $content, $photo, $userId, $categoryId, $tags,$type){
-        $connect=new Database();
-       $this->pdo= $connect->connect();
+    public function updateCourses($courseId, $titre, $description, $content, $photo, $userId, $categoryId, $tags, $type)
+    {
+        $connect = new Database();
+        $this->pdo = $connect->connect();
 
-       $stmt=$this->pdo->prepare("delete from courseTags where courseId=?");
-       $stmt->execute([$courseId]);
+        $stmt = $this->pdo->prepare("delete from courseTags where courseId=?");
+        $stmt->execute([$courseId]);
 
-       $stmt=$this->pdo->prepare("UPDATE   courses SET titre=?,description=?,content=?, photo=?, teacherId=?, categoryId=?, type=? where courseId=? ");
-       $stmt->execute([$titre, $description, $content, $photo, $userId, $categoryId,$type,$courseId]);
+        $stmt = $this->pdo->prepare("UPDATE   courses SET titre=?,description=?,content=?, photo=?, teacherId=?, categoryId=?, type=? where courseId=? ");
+        $stmt->execute([$titre, $description, $content, $photo, $userId, $categoryId, $type, $courseId]);
 
-       $tagss=$tags;
-       foreach ($tagss as $tag) {
-        $stmt = $this->pdo->prepare("INSERT INTO courseTags (tagId,courseId) values(?,?)");
-        $stmt->execute([$tag, $courseId]);
+        $tagss = $tags;
+        foreach ($tagss as $tag) {
+            $stmt = $this->pdo->prepare("INSERT INTO courseTags (tagId,courseId) values(?,?)");
+            $stmt->execute([$tag, $courseId]);
+        }
+        header("location:../views/enseignant/affichageCourses.php");
     }
-    header("location:../views/enseignant/affichageCourses.php");
+    public function switchActive($courseId)
+    {
+        $connect = new Database();
+        $this->pdo = $connect->connect();
+        $stmt = $this->pdo->prepare("UPDATE courses SET courseStatus=CASE
+    WHEN courseStatus='desactive' THEN 'active' ELSE 'desactive' END WHERE courseId=?");
+        return $stmt->execute([$courseId]);
     }
-public function switchActive($courseId){
-    $connect=new Database();
-    $this->pdo= $connect->connect();
-    $stmt=$this->pdo->prepare("UPDATE courses SET courseStatus=CASE
-    WHEN courseStatus='desactive' THEN 'active' ELSE 'desactive' END WHERE courseId=?" );  
-   return $stmt->execute([$courseId]);
-
 }
-}
-
-
-
-
-
-
-
-
-
