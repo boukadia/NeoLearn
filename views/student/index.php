@@ -28,6 +28,9 @@ if ($_SESSION['role'] !== "student") {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
 
     <!-- Custom CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+
     <link rel="stylesheet" href="../../assests/css/style.css">
 
 </head>
@@ -79,10 +82,10 @@ if ($_SESSION['role'] !== "student") {
                     $page = $_GET['page'];
                 
                     $courses->getAllCourses($_SESSION['role'],$_GET['page']);
+                    echo $page;
                 } else {
                     $courses->getAllCourses($_SESSION['role'], 1);
-                    
-                    echo $n;
+
 
                 }
 
@@ -115,18 +118,7 @@ if ($_SESSION['role'] !== "student") {
             </div>
         </section>
 
-        <!-- Avis Étudiant -->
-        <section class="student-reviews">
-            <h2>Avis sur mes Cours</h2>
-            <div class="reviews">
-                <div class="review">
-                    <p class="review-text">"Les cours sont très bien structurés et permettent une prise en main rapide. Je recommande !" - <strong>Marie Dupont</strong></p>
-                </div>
-                <div class="review">
-                    <p class="review-text">"J'ai appris beaucoup grâce à ce site. Les enseignants sont super et les cours sont très complets." - <strong>Marc Lefevre</strong></p>
-                </div>
-            </div>
-        </section>
+    
     </main>
 <!-- ================pagination======================== -->
 
@@ -137,7 +129,7 @@ if ($_SESSION['role'] !== "student") {
 
         <?php
 
-        for ($i = 1; $i <= $_SESSION['nbreCourses']; $i++) {
+        for ($i = 1; $i <= $_SESSION['nbrePages']; $i++) {
             echo "
         <li class='page-item'><a class='page-link' href='?page=$i'>$i</a>&nbsp</li>
 ";

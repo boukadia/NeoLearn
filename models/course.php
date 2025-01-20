@@ -106,14 +106,14 @@ class Course
 $nbreCourse=count($nbr);
 // session_start();
 // echo $nbreCourse;
-$nbreElementParPage = 2;
+$nbreElementParPage = 6;
 
 $nbrePages = ceil($nbreCourse / $nbreElementParPage);
 $debut = ($page - 1) * $nbreElementParPage;
 $stmt = $this->pdo->prepare("SELECT users.userName,courses.courseId,courses.courseStatus,
 courses.titre,courses.description FROM courses  INNER JOIN users ON 
 users.userId=courses.teacherId LIMIT $debut,$nbreElementParPage ");
-$_SESSION['nbreCourses']=$nbrePages;
+$_SESSION['nbrePages']=$nbrePages;
 
 
         if ($userRole == 'admin') {
@@ -133,7 +133,7 @@ $_SESSION['nbreCourses']=$nbrePages;
                 // return $stmt->fetch(PDO::FETCH_ASSOC);
             }
         } else if ($userRole == 'student') {
-            $stmt = $this->pdo->prepare("SELECT users.userId,users.userName,courses.courseId,courses.courseStatus,courses.titre,courses.description,courses.photo FROM courses  INNER JOIN users ON users.userId=courses.teacherId && courseStatus='active'");
+            $stmt = $this->pdo->prepare("SELECT users.userId,users.userName,courses.courseId,courses.courseStatus,courses.titre,courses.description,courses.photo FROM courses  INNER JOIN users ON users.userId=courses.teacherId && courseStatus='active' LIMIT $debut,$nbreElementParPage");
             $stmt->execute();
             // $nbre=($stmt->fetch(PDO::FETCH_ASSOC)) ;
            
@@ -156,7 +156,7 @@ $_SESSION['nbreCourses']=$nbrePages;
                 }
             }
         } else {
-            $stmt = $this->pdo->prepare("SELECT users.userId,users.userName,courses.courseId,courses.courseStatus,courses.titre,courses.description,courses.photo FROM courses  INNER JOIN users ON users.userId=courses.teacherId && courseStatus='active'");
+            $stmt = $this->pdo->prepare("SELECT users.userId,users.userName,courses.courseId,courses.courseStatus,courses.titre,courses.description,courses.photo FROM courses  INNER JOIN users ON users.userId=courses.teacherId && courseStatus='active' LIMIT $debut,$nbreElementParPage");
             $stmt->execute();
 
             while ($course = $stmt->fetch(PDO::FETCH_ASSOC)) {
