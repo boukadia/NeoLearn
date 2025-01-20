@@ -39,6 +39,8 @@ class Tags{
     public function deleteTag($tagId){
         $connect=new Database();
         $pdo=$connect->connect();
+        $stmt=$pdo->prepare("DELETE  FROM  courseTags WHERE tagId=?");
+        $stmt->execute([$tagId]);
         $stmt=$pdo->prepare("DELETE  FROM  tags WHERE tagId=?");
         $stmt->execute([$tagId]);
         }
