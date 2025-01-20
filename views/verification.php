@@ -1,5 +1,7 @@
 <?php
+// session_start();
 session_start();
+session_regenerate_id(true); 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/user.php');
 if (isset($_POST['register'])) {
     $userName = $_POST['userName'];

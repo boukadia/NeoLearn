@@ -1,7 +1,9 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/course.php');
 $course = new Course();
+// session_start();
 session_start();
+session_regenerate_id(true); 
 ?>
 
 <!DOCTYPE html>

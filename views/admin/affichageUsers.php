@@ -2,8 +2,8 @@
 <?php 
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/user.php');
-
 session_start();
+session_regenerate_id(true); 
 if ($_SESSION['role'] != "admin") {
     session_destroy();
 

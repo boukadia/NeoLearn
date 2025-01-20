@@ -42,7 +42,8 @@ public function getRole(){
 
     public function login($email, $password)
     {
-
+        session_start();
+        session_regenerate_id(true); 
         // $connect = new Database();
         // $this->pdo = $connect->connect();
 

@@ -1,5 +1,8 @@
 <?php
+// session_start();
 session_start();
+session_regenerate_id(true); 
+
 if ($_SESSION['role'] != 'student') {
     session_destroy();
     header("location: ../login.html");

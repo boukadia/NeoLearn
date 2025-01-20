@@ -2,6 +2,7 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/user.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . './youdemy/models/course.php');
 session_start();
+session_regenerate_id(true); 
 $teacherId = $_SESSION['userId'];
 if ($_SESSION['role'] != "admin") {
     session_destroy();

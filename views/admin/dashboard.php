@@ -2,7 +2,12 @@
 <?php 
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/user.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/statistique.php');
+
 session_start();
+
+session_regenerate_id(true); 
+echo $_SESSION['userId'];
 if ($_SESSION['role'] != "admin") {
     session_destroy();
 
@@ -35,7 +40,15 @@ if ($_SESSION['role'] != "admin") {
 </div>
 
 <script>
-    const labels = [65, 59, 80, 81, 56, 55, 40] ;
+    <?php 
+    
+     $afficherStatistiques=new Statistique();
+    $a= $afficherStatistiques->afficheNombreCourses();
+
+    foreach($a as $c)
+    $b[]=$c['titre']
+    ?>
+    const labels =<?php echo json_encode($b ) ?> ;
 const data = {
   labels: labels,
   datasets: [{

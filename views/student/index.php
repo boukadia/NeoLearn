@@ -3,7 +3,9 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/user.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/course.php');
 session_start();
-
+// session_start();
+session_regenerate_id(true); 
+echo $_SESSION['userId'];
 
 if ($_SESSION['role'] !== "student") {
     session_destroy();

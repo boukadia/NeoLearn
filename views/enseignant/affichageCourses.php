@@ -1,5 +1,7 @@
 <?php 
+
 session_start();
+session_regenerate_id(true); 
 $teacherId=$_SESSION['userId'];
 if ($_SESSION['role'] != "enseignant" ||$_SESSION['status']=="pending") {
     session_destroy();

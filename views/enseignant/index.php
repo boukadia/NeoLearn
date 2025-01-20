@@ -2,7 +2,9 @@
 require_once($_SERVER['DOCUMENT_ROOT'].'./youdemy/models/course.php');
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/user.php');
+// session_start();
 session_start();
+session_regenerate_id(true); 
 
 $teacherId=$_SESSION['userId'];
 // echo $teacherId;
