@@ -20,6 +20,9 @@ if ($_SESSION['role'] != "admin") {
     <link rel="stylesheet" href="../../assests/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+
 </head>
 
 <body>
@@ -82,9 +85,14 @@ if ($_SESSION['role'] != "admin") {
                     <?php
 
                     $course = new Course();
+                    if(isset($_GET['page']))
+                    $course->getAllCourses($_SESSION['role'],$_GET['page']);
+                else{
+
+                    $course->getAllCourses($_SESSION['role'],1);
+                }
 
 
-                    $course->getAllCourses($_SESSION['role'])
                     ?>
 
                 </tbody>
@@ -95,7 +103,30 @@ if ($_SESSION['role'] != "admin") {
 
 
 
-    </main>main
+    </main>
+    <!-- ================pagination======================== -->
+
+<div style="display: flex;justify-content: center" class="pagination">
+
+<nav aria-label='Page navigation example'>
+    <ul class='pagination'>
+
+        <?php
+
+        for ($i = 1; $i <= $_SESSION['nbrePages']; $i++) {
+            echo "
+        <li class='page-item'><a class='page-link' href='?page=$i'>$i</a>&nbsp</li>
+";
+        }
+        ?>
+
+    </ul>
+</nav>
+
+
+
+
+</div>main
 
 
 </body>

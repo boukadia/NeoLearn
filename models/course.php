@@ -106,13 +106,14 @@ class Course
 $nbreCourse=count($nbr);
 // session_start();
 // echo $nbreCourse;
-$nbreElementParPage = 6;
+$nbreElementParPage = 4;
 
 $nbrePages = ceil($nbreCourse / $nbreElementParPage);
 $debut = ($page - 1) * $nbreElementParPage;
 $stmt = $this->pdo->prepare("SELECT users.userName,courses.courseId,courses.courseStatus,
 courses.titre,courses.description FROM courses  INNER JOIN users ON 
 users.userId=courses.teacherId LIMIT $debut,$nbreElementParPage ");
+$stmt->execute();
 $_SESSION['nbrePages']=$nbrePages;
 
 
