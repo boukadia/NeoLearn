@@ -85,12 +85,12 @@ if ($_SESSION['role'] != "admin") {
                     <?php
 
                     $course = new Course();
-                    if(isset($_GET['page']))
-                    $course->getAllCourses($_SESSION['role'],$_GET['page']);
-                else{
+                    if (isset($_GET['page']))
+                        $course->getAllCourses($_SESSION['role'], $_GET['page']);
+                    else {
 
-                    $course->getAllCourses($_SESSION['role'],1);
-                }
+                        $course->getAllCourses($_SESSION['role'], 1);
+                    }
 
 
                     ?>
@@ -106,27 +106,27 @@ if ($_SESSION['role'] != "admin") {
     </main>
     <!-- ================pagination======================== -->
 
-<div style="display: flex;justify-content: center" class="pagination">
+    <div style="display: flex;justify-content: center" class="pagination">
 
-<nav aria-label='Page navigation example'>
-    <ul class='pagination'>
+        <nav aria-label='Page navigation example'>
+            <ul class='pagination'>
 
-        <?php
+                <?php
 
-        for ($i = 1; $i <= $_SESSION['nbrePages']; $i++) {
-            echo "
+                for ($i = 1; $i <= $_SESSION['nbrePages']; $i++) {
+                    echo "
         <li class='page-item'><a class='page-link' href='?page=$i'>$i</a>&nbsp</li>
 ";
-        }
-        ?>
+                }
+                ?>
 
-    </ul>
-</nav>
-
-
+            </ul>
+        </nav>
 
 
-</div>main
+
+
+    </div>main
 
 
 </body>

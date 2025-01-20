@@ -12,7 +12,10 @@ class Course
     private $pdo;
 
 
-
+    public function __construct() {
+        $connect = new Database();
+        $this->pdo = $connect->connect();
+    }
 
     public function addCourse($titre, $description, $content, $photo, $userId, $categoryId, $tags, $type)
     {
@@ -115,6 +118,7 @@ courses.titre,courses.description FROM courses  INNER JOIN users ON
 users.userId=courses.teacherId LIMIT $debut,$nbreElementParPage ");
 $stmt->execute();
 $_SESSION['nbrePages']=$nbrePages;
+$_SESSION['nbreCourses']=$nbreCourse;
 
 
         if ($userRole == 'admin') {

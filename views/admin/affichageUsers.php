@@ -71,7 +71,21 @@ if ($_SESSION['role'] != "admin") {
               <?php 
               
               $user=new User();
-              $user->getUsers();
+              $users=$user->getUsers();
+              foreach ($users as $user ) {
+                echo "
+                 <tbody>
+                        <tr>
+                            <td>" . $user['userName'] . "</td>
+                          
+                            <td><span class='status active'>" . $user['status'] . "</span></td>
+                            <td><a href='../../models/deleteUser.php?userId=" . $user['userId'] . "' class='edit-btn'>delete</a>
+                            <a href='../../models/switch.php?userId=" . $user['userId'] . "' class='edit-btn'>switch</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                ";
+            }
               ?>
             </table>
         </section>
