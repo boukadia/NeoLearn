@@ -51,7 +51,7 @@ class Course
         while ($tag = $stmt->fetch(PDO::FETCH_ASSOC)) {
             echo "
         <label>
-      <input type='checkbox' name='tags[]' value='" . $tag['tagId'] . "'> " . $tag['tagName'] . "
+      <input type='checkbox' name='tags[]' value='" .htmlspecialchars($tag['tagId'])  . "'> " .htmlspecialchars ($tag['tagName']) . "
     </label>
         ";
         }
@@ -65,7 +65,7 @@ class Course
 
         while ($category = $stmt->fetch(PDO::FETCH_ASSOC)) {
             echo "
-                  <option value='" . $category['categoryId'] . "'> " . $category['categoryName'] . "</option>
+                  <option value='" .htmlspecialchars($category['categoryId'])  . "'> " .htmlspecialchars($category['categoryName'])  . "</option>
       
         ";
         }
@@ -81,12 +81,12 @@ class Course
         while ($courses = $stmt->fetch(PDO::FETCH_ASSOC)) {
             echo "
                 <div class='card'>
-                <h3>" . $courses['titre'] . "</h3>
-                <img src='../../assests/images/" . $courses['photo'] . "' alt=''>
-                <p>" . $courses['description'] . " </p>
-                <p style='background-color:#69c869 ;padding:10px;border-radius:10px'>" . $courses['courseStatus'] . " </p>
-                <a href='../../models/deleteCourse.php?courseId=" . $courses['courseId'] . "' class='btn'>delete</a>
-                <a href='../../models/updateCourse.php?courseId=" . $courses['courseId'] . " ' class='btn'>update</a>
+                <h3>" .htmlspecialchars($courses['titre'])  . "</h3>
+                <img src='../../assests/images/" .htmlspecialchars($courses['photo'])  . "' alt=''>
+                <p>" .htmlspecialchars($courses['description'] ) . " </p>
+                <p style='background-color:#69c869 ;padding:10px;border-radius:10px'>" .htmlspecialchars($courses['courseStatus'])  . " </p>
+                <a href='../../models/deleteCourse.php?courseId=" .htmlspecialchars($courses['courseId'])  . "' class='btn'>delete</a>
+                <a href='../../models/updateCourse.php?courseId=" .htmlspecialchars($courses['courseId'])  . " ' class='btn'>update</a>
     </div>
             ";
         }
@@ -94,45 +94,65 @@ class Course
 
 
 
-    public function getAllCourses($userRole)
+    public function getAllCourses($userRole,$page)
     {
 
         $connect = new Database();
         $this->pdo = $connect->connect();
         $stmt = $this->pdo->prepare("SELECT users.userName,courses.courseId,courses.courseStatus,courses.titre,courses.description FROM courses  INNER JOIN users ON users.userId=courses.teacherId");
         $stmt->execute();
+        $nbr=$stmt->fetchAll(pdo::FETCH_ASSOC);
+
+$nbreCourse=count($nbr);
+// session_start();
+// echo $nbreCourse;
+$nbreElementParPage = 2;
+
+$nbrePages = ceil($nbreCourse / $nbreElementParPage);
+$debut = ($page - 1) * $nbreElementParPage;
+$stmt = $this->pdo->prepare("SELECT users.userName,courses.courseId,courses.courseStatus,
+courses.titre,courses.description FROM courses  INNER JOIN users ON 
+users.userId=courses.teacherId LIMIT $debut,$nbreElementParPage ");
+$_SESSION['nbreCourses']=$nbrePages;
+
+
         if ($userRole == 'admin') {
 
 
             while ($courses = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 echo "
                 <tr>
-                <td>" . $courses['titre'] . "</td>
-                <td>" . $courses['userName'] . "</td>
-                <td>" . $courses['description'] . "</td>
-                <td><span class='status active'>" . $courses['courseStatus'] . "</span></td>
-                <td> <a style=text-decoration:none' href='../../models/softDeletCourse.php?courseId=" . $courses['courseId'] . "' class='btn'>delete</a>
-                <a href='../../models/switch.php?courseId=" . $courses['courseId'] . "' class='btn'>switch</a></td>
+                <td>" .htmlspecialchars($courses['titre'])  . "</td>
+                <td>" .htmlspecialchars($courses['userName'])  . "</td>
+                <td>" .htmlspecialchars($courses['description'])  . "</td>
+                <td><span class='status active'>" .htmlspecialchars($courses['courseStatus'])  . "</span></td>
+                <td> <a style=text-decoration:none' href='../../models/softDeletCourse.php?courseId=" .htmlspecialchars($courses['courseId'])  . "' class='btn'>delete</a>
+                <a href='../../models/switch.php?courseId=" .htmlspecialchars($courses['courseId'] ) . "' class='btn'>switch</a></td>
                 </tr>
                 ";
+                // return $stmt->fetch(PDO::FETCH_ASSOC);
             }
         } else if ($userRole == 'student') {
             $stmt = $this->pdo->prepare("SELECT users.userId,users.userName,courses.courseId,courses.courseStatus,courses.titre,courses.description,courses.photo FROM courses  INNER JOIN users ON users.userId=courses.teacherId && courseStatus='active'");
             $stmt->execute();
+            // $nbre=($stmt->fetch(PDO::FETCH_ASSOC)) ;
+           
 
             while ($course = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 if ($course['courseStatus'] == 'active') {
+                    
 
 
                     echo "
                 <div style='background-color:#ffcc80;flex-wrap:wrap' class='course-item'>
-                    <img src='../../assests/images/" . $course['photo'] . "' alt='Cours HTML'>
-                    <h3>" . $course['titre'] . "</h3>
-                    <p>" . $course['description'] . "</p>
-                    <p style='text-align:left;color:red'>Pr." . $course['userName'] . "</p>
-                    <a href='../../models/addMyCourse.php?userId=" . $course['userId'] . "&&courseId=" . $course['courseId'] . "' class='btn'>s'inscrire</a>
+                    <img src='../../assests/images/" .htmlspecialchars($course['photo'])  . "' alt='Cours HTML'>
+                    <h3>" .htmlspecialchars($course['titre'] ) . "</h3>
+                    <p>" .htmlspecialchars($course['description'])  . "</p>
+                    <p style='text-align:left;color:red'>Pr." .htmlspecialchars($course['userName'])  . "</p>
+                    <a href='../../models/addMyCourse.php?userId=" . htmlspecialchars ($course['userId']) . "&&courseId=" .htmlspecialchars ($course['courseId'] ). "' class='btn'>s'inscrire</a>
                 </div>
                 ";
+                // return $stmt->fetch(PDO::FETCH_ASSOC);
                 }
             }
         } else {
@@ -143,15 +163,17 @@ class Course
                 if ($course['courseStatus'] == 'active') {
                     echo "
           <div class='card'>
-            <img src='../assests/images/" . $course['photo'] . "' alt='Course 1'>
-            <h3>" . $course['titre'] . "</h3>
-                    <p>" . $course['description'] . "</p>
-                    <p style='text-align:left;color:red'>Pr." . $course['userName'] . "</p>
+            <img src='../assests/images/" .htmlspecialchars($course['photo'])  . "' alt='Course 1'>
+            <h3>" .htmlspecialchars($course['titre'] ) . "</h3>
+                    <p>" .htmlspecialchars( $course['description']) . "</p>
+                    <p style='text-align:left;color:red'>Pr." .htmlspecialchars($course['userName'])  . "</p>
                     <a href='login.html' class='btn'>s'inscrire</a>
                             </div> ";
+                            // return $stmt->fetch(PDO::FETCH_ASSOC);
                 }
             }
         }
+        // return $nbrePages;
     }
 
 
@@ -172,10 +194,10 @@ class Course
                 echo "
                
             <div style='background-color:#ffcc80;flex-wrap:wrap' class='course-item'>
-                <img src='../assests/images/" . $course['photo'] . "' alt='Cours HTML'>
-                <h3>" . $course['titre'] . "</h3>
+                <img src='../assests/images/" .htmlspecialchars($course['photo'])  . "' alt='Cours HTML'>
+                <h3>" .htmlspecialchars($course['titre'])  . "</h3>
                 <p>" . $course['description'] . "</p>
-                <p style='text-align:left;color:red'>Pr." . $course['userName'] . "</p>
+                <p style='text-align:left;color:red'>Pr." . htmlspecialchars($course['userName'] ). "</p>
                 <a href='login.html' class='btn'>s'inscrire</a>
             </div>
             ";
@@ -200,7 +222,7 @@ class Course
      WHERE enrollments.studentId = ?;");
         $stmt->execute([$studentId]);
         $course = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $nbreElementParPage = 3;
+        $nbreElementParPage = 8;
         $nbreCourse = count($course);
         $nbrePages = ceil($nbreCourse / $nbreElementParPage);
         $debut = ($page - 1) * $nbreElementParPage;
@@ -216,6 +238,7 @@ class Course
      LIMIT $debut,$nbreElementParPage
      ;");
         $stmt->execute([$studentId]);
+        
 
 
 
@@ -296,7 +319,7 @@ class Course
     WHEN courseStatus='desactive' THEN 'active' ELSE 'desactive' END WHERE courseId=?");
         return $stmt->execute([$courseId]);
     }
-    // ================================pagination===============================
+   
 
 
 }

@@ -1,24 +1,21 @@
-
 <?php
 session_start();
-if ($_SESSION['role']!='student'){
+if ($_SESSION['role'] != 'student') {
     session_destroy();
-header("location: ../login.html");
-exit();
+    header("location: ../login.html");
+    exit();
+} else {
 }
-else{
+require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/course.php');
+$studentId = $_SESSION['userId'];
+$myCourses = new Course();
+if (isset($_GET['page'])) {
+    $page = $_GET['page'];
 
+    $courses = $myCourses->getMyCourses($studentId, $_GET['page']);
+} else {
+    $courses = $myCourses->getMyCourses($studentId, 1);
 }
-require_once($_SERVER['DOCUMENT_ROOT'].'/youdemy/models/course.php');
-$studentId=$_SESSION['userId'];
-$myCourses=new Course();
-if (isset($_GET['page']))
-$courses=$myCourses->getMyCourses($studentId,$_GET['page']);
-else{
-$courses=$myCourses->getMyCourses($studentId,1);
-
-}
-$page=$_GET['page'];
 
 
 ?>
@@ -41,7 +38,7 @@ $page=$_GET['page'];
         </div>
         <nav class="sidebar-nav">
             <ul>
-            <li><a href="index.php"><i class="fas fa-home"></i> Accueil</a></li>
+                <li><a href="index.php"><i class="fas fa-home"></i> Accueil</a></li>
                 <li><a href="profile.php"><i class="fas fa-user"></i> Profil</a></li>
                 <li><a href="myCourses.php"><i class="fas fa-graduation-cap"></i> Cours</a></li>
                 <li><a href="../logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
@@ -66,43 +63,43 @@ $page=$_GET['page'];
         <section class="dashboard-overview">
             <h2>Courses Overview</h2>
             <div class='cards'>
-            <?php
-            foreach($courses[0] as $course) 
-            echo"
+                <?php
+                foreach ($courses[0] as $course)
+                    echo "
                 <div class='card'>
-                    <img src='../../assests/images/".$course['photo']."' alt='Course 1'>
-                    <h3>".$course['titre']."</h3>
-                    <p>".$course['description']."</p>
-                    <a href='courseContent.php?courseId=".$course['courseId']."&&".$_SESSION['userId']."' class='btn'>View Details</a>
+                    <img src='../../assests/images/" . $course['photo'] . "' alt='Course 1'>
+                    <h3>" . $course['titre'] . "</h3>
+                    <p>" . $course['description'] . "</p>
+                    <a href='courseContent.php?courseId=" . $course['courseId'] . "&&" . $_SESSION['userId'] . "' class='btn'>View Details</a>
                 </div>
               
                 ";
                 ?>
-                
-                
+
+
             </div>
         </section>
         <!-- ================pagination======================== -->
 
-        <div class="pagination">
-            
+        <div style="display: flex;justify-content: center" class="pagination">
+
             <nav aria-label='Page navigation example'>
                 <ul class='pagination'>
-                    <li class='page-item'><a class='page-link' href='#'>Previous</a></li>
-                    <?php 
-                    for($i=1;$i<=$courses[1];$i++){
-                echo"
+
+                    <?php
+
+                    for ($i = 1; $i <= $courses[1]; $i++) {
+                        echo "
                     <li class='page-item'><a class='page-link' href='?page=$i'>$i</a>&nbsp</li>
             ";
-    }
-     ?>
-                 <?php 
-                 echo "<li class='page-item'><a class='page-link' href='?page=$page+1'>Next</a></li>" ?>   
+                    }
+                    ?>
+
                 </ul>
-</nav>
+            </nav>
 
 
-               
+
 
         </div>
     </div>

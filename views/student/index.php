@@ -75,14 +75,21 @@ if ($_SESSION['role'] !== "student") {
 
                 <?php
                 $courses = new Course();
-                $courses->getAllCourses($_SESSION['role']);
+                if (isset($_GET['page'])) {
+                    $page = $_GET['page'];
+                
+                    $courses->getAllCourses($_SESSION['role'],$_GET['page']);
+                } else {
+                    $courses->getAllCourses($_SESSION['role'], 1);
+                    
+                    echo $n;
+
+                }
+
+
+               
                 ?>
-                <!-- <div class="course-item">
-                    <img src="images/course-html.jpg" alt="Cours HTML">
-                    <h3>Développement HTML pour Débutants</h3>
-                    <p>Apprenez les bases du HTML pour créer des pages web.</p>
-                    <a href="course-detail.html" class="btn">Voir le cours</a>
-                </div> -->
+            
 
 
 
@@ -121,7 +128,29 @@ if ($_SESSION['role'] !== "student") {
             </div>
         </section>
     </main>
+<!-- ================pagination======================== -->
 
+<div style="display: flex;justify-content: center" class="pagination">
+
+<nav aria-label='Page navigation example'>
+    <ul class='pagination'>
+
+        <?php
+
+        for ($i = 1; $i <= $_SESSION['nbreCourses']; $i++) {
+            echo "
+        <li class='page-item'><a class='page-link' href='?page=$i'>$i</a>&nbsp</li>
+";
+        }
+        ?>
+
+    </ul>
+</nav>
+
+
+
+
+</div>
     <!-- Footer -->
     <footer class="footer">
         <p>&copy; 2025 Educa. Tous droits réservés.</p>
