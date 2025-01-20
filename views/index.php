@@ -14,10 +14,6 @@ $course = new Course();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
     <title>Header Navigation</title>
     <style>
-       
-
-       
-
         .headerr {
             background-color: #ffffff;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -250,12 +246,9 @@ $course = new Course();
                 <?php
                 if (isset($_POST['submit']) && $_POST['recherche'] == '') {
                     $course->getAllCourses("visiteur");
-                } 
-                else if (!isset($_POST['submit'])){
+                } else if (!isset($_POST['submit'])) {
                     $course->getAllCourses("visiteur");
-                }
-                
-                else {
+                } else {
 
                     $course->rechercheCourse($_POST['recherche']);
                 }

@@ -1,44 +1,29 @@
 <?php
-
 require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/user.php');
-require_once($_SERVER['DOCUMENT_ROOT'].'./youdemy/models/course.php');
-
+require_once($_SERVER['DOCUMENT_ROOT'] . './youdemy/models/course.php');
 session_start();
-$teacherId=$_SESSION['userId'];
-
-session_start();
+$teacherId = $_SESSION['userId'];
 if ($_SESSION['role'] != "admin") {
     session_destroy();
 
     header("location : ../login.html");
     exit();
 } else {
-
 }
-
-
-// session_start();
-// echo $teacherId;
-
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../assests/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
-
-
     <title>Document</title>
 </head>
+
 <body>
-
-
-
-<div class="sidebar">
+    <div class="sidebar">
         <div class="sidebar-header">
             <h2 class="logo">Youdemy</h2>
         </div>
@@ -57,8 +42,8 @@ if ($_SESSION['role'] != "admin") {
 
 
     <section class="button-section">
-    <a href="createCourse.php" class="add-category-button"><i class="fas fa-folder-plus"></i> Add courses</a>
-</section>
+        <a href="createCourse.php" class="add-category-button"><i class="fas fa-folder-plus"></i> Add courses</a>
+    </section>
 
 
 
@@ -79,9 +64,9 @@ if ($_SESSION['role'] != "admin") {
                 </div>
             </div>
         </header>
-        
-          <!------------------------ Course Management ---------------------------------->
-          <section class="course-management">
+
+        <!------------------------ Course Management ---------------------------------->
+        <section class="course-management">
             <h2>Manage Courses</h2>
             <table>
                 <thead>
@@ -94,24 +79,25 @@ if ($_SESSION['role'] != "admin") {
                     </tr>
                 </thead>
                 <tbody>
-                <?php
-                    
-                    $course=new Course();
-                    
-                    
+                    <?php
+
+                    $course = new Course();
+
+
                     $course->getAllCourses($_SESSION['role'])
                     ?>
-              
+
                 </tbody>
             </table>
         </section>
-            
-    
-    
-  
 
-</main>main
+
+
+
+
+    </main>main
 
 
 </body>
+
 </html>

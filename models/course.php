@@ -72,7 +72,7 @@ class Course
     }
     public function getCourses($teacherId)
     {
- 
+
         $connect = new Database();
         $this->pdo = $connect->connect();
         $stmt = $this->pdo->prepare("SELECT * FROM courses where teacherId=? ");
@@ -96,15 +96,14 @@ class Course
 
     public function getAllCourses($userRole)
     {
-        
+
         $connect = new Database();
         $this->pdo = $connect->connect();
         $stmt = $this->pdo->prepare("SELECT users.userName,courses.courseId,courses.courseStatus,courses.titre,courses.description FROM courses  INNER JOIN users ON users.userId=courses.teacherId");
         $stmt->execute();
         if ($userRole == 'admin') {
 
-            echo " <pre>";
-            print_r($courses = $stmt->fetch(PDO::FETCH_ASSOC));
+          
             while ($courses = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 echo "
                 <tr>
@@ -120,7 +119,7 @@ class Course
         } else if ($userRole == 'student') {
             $stmt = $this->pdo->prepare("SELECT users.userId,users.userName,courses.courseId,courses.courseStatus,courses.titre,courses.description,courses.photo FROM courses  INNER JOIN users ON users.userId=courses.teacherId && courseStatus='active'");
             $stmt->execute();
-        
+
             while ($course = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 if ($course['courseStatus'] == 'active') {
 
@@ -136,11 +135,10 @@ class Course
                 ";
                 }
             }
-        }
-        else{
+        } else {
             $stmt = $this->pdo->prepare("SELECT users.userId,users.userName,courses.courseId,courses.courseStatus,courses.titre,courses.description,courses.photo FROM courses  INNER JOIN users ON users.userId=courses.teacherId && courseStatus='active'");
             $stmt->execute();
-            
+
             while ($course = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 if ($course['courseStatus'] == 'active') {
                     echo "
@@ -149,22 +147,24 @@ class Course
             <h3>" . $course['titre'] . "</h3>
                     <p>" . $course['description'] . "</p>
                     <p style='text-align:left;color:red'>Pr." . $course['userName'] . "</p>
-                    <a href='../../models/addMyCourse.php?userId=" . $course['userId'] . "&&courseId=" . $course['courseId'] . "' class='btn'>s'inscrire</a>
+                    <a href='login.html' class='btn'>s'inscrire</a>
                             </div> ";
+                }
+            }
         }
-        
-    }}}
+    }
 
 
 
 
-    public function rechercheCourse($mots){
-        $connect=new Database();
+    public function rechercheCourse($mots)
+    {
+        $connect = new Database();
 
-        $this->pdo=$connect->connect();
+        $this->pdo = $connect->connect();
         $stmt = $this->pdo->prepare("SELECT users.userId,users.userName,courses.courseId,courses.courseStatus,courses.titre,courses.description,courses.photo FROM courses  INNER JOIN users ON (users.userId=courses.teacherId && courseStatus='active') where courses.titre like ?");
-         $mot = "%".$mots."%";
-        $stmt->execute(params:[$mot] );
+        $mot = "%" . $mots . "%";
+        $stmt->execute(params: [$mot]);
         while ($course = $stmt->fetch(PDO::FETCH_ASSOC)) {
             if ($course['courseStatus'] == 'active') {
 
@@ -176,17 +176,16 @@ class Course
                 <h3>" . $course['titre'] . "</h3>
                 <p>" . $course['description'] . "</p>
                 <p style='text-align:left;color:red'>Pr." . $course['userName'] . "</p>
-                <a href='../../models/addMyCourse.php?userId=" . $course['userId'] . "&&courseId=" . $course['courseId'] . "' class='btn'>s'inscrire</a>
+                <a href='login.html' class='btn'>s'inscrire</a>
             </div>
             ";
             }
-
+        }
     }
-}
 
 
 
-    public function getMyCourses($studentId)
+    public function getMyCourses($studentId,$page)
     {
         $connect = new Database();
         $this->pdo = $connect->connect();
@@ -200,9 +199,27 @@ class Course
     
      WHERE enrollments.studentId = ?;");
         $stmt->execute([$studentId]);
+        $course=$stmt->fetchAll(PDO::FETCH_ASSOC);
+        $nbreElementParPage=3;
+       $nbreCourse= count($course);
+       $nbrePages=ceil($nbreCourse/$nbreElementParPage);
+       $debut=($page-1)*$nbreElementParPage;
 
 
-        return ($stmt->fetchAll(PDO::FETCH_ASSOC));
+        $stmt = $this->pdo->prepare("SELECT courses.titre,courses.content,courses.description,courses.photo,users.userName,
+        enrollments.studentId,enrollments.courseId, category.categoryName
+         FROM enrollments INNER JOIN courses ON enrollments.courseId=courses.courseId 
+        inner JOIN users ON enrollments.studentId=users.userId
+         inner JOIN category ON courses.categoryId = category.categoryId
+    
+     WHERE enrollments.studentId = ?
+     LIMIT $debut,$nbreElementParPage
+     ;");
+        $stmt->execute([$studentId]);
+
+       
+        
+         return  ([$stmt->fetchAll(PDO::FETCH_ASSOC),$nbrePages]);
 
 
 
@@ -216,21 +233,17 @@ class Course
         $connect = new Database();
 
         $this->pdo = $connect->connect();
-        $stmt=$this->pdo->prepare("SELECT * FROM enrollments");
+        $stmt = $this->pdo->prepare("SELECT * FROM enrollments");
         $stmt->execute();
-        $courses=$stmt->fetchAll(PDO::FETCH_ASSOC);
-        foreach($courses as $course){
-            if($courseId==$course['courseId']){
-            echo"you are   already enroll in this course";
-            return $course['courseId'];
+        $courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($courses as $course) {
+            if ($courseId == $course['courseId']) {
+                echo "you are   already enroll in this course";
+                return $course['courseId'];
+            }
         }
-    }
-       $stmt = $this->pdo->prepare("INSERT INTO enrollments(studentId,courseId) VALUES(?,?)");
-    $stmt->execute([$studentId, $courseId]); 
-    
-        
-        
-        
+        $stmt = $this->pdo->prepare("INSERT INTO enrollments(studentId,courseId) VALUES(?,?)");
+        $stmt->execute([$studentId, $courseId]);
     }
 
     //    ======================soft delete pour admin=================================
@@ -283,4 +296,63 @@ class Course
     WHEN courseStatus='desactive' THEN 'active' ELSE 'desactive' END WHERE courseId=?");
         return $stmt->execute([$courseId]);
     }
+    // ================================pagination===============================
+    
+    
+    public function rechercheCourseAvecPagination($mots, $page = 1, $limit = 5) {
+        $connect = new Database();
+        $this->pdo = $connect->connect();
+    
+        $offset = ($page - 1) * $limit;
+    
+        $stmt = $this->pdo->prepare("SELECT users.userName, users.userId, courses.courseId, courses.courseStatus, courses.titre, courses.description, courses.photo
+            FROM courses
+            INNER JOIN users ON users.userId = courses.teacherId
+            WHERE courses.titre LIKE :mot
+            LIMIT :limit OFFSET :offset");
+    
+        $mot = "%" . $mots . "%";
+        $stmt->bindValue(':mot', $mot, PDO::PARAM_STR);
+        $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', (int)$offset, PDO::PARAM_INT);
+    
+        $stmt->execute();
+    
+        while ($course = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            if ($course['courseStatus'] == 'active') {
+                echo "
+                    <div style='background-color:#ffcc80;flex-wrap:wrap' class='course-item'>
+                        <img src='../../assests/images/" . htmlspecialchars($course['photo']) . "' alt='Cours'>
+                        <h3>" . htmlspecialchars($course['titre']) . "</h3>
+                        <p>" . htmlspecialchars($course['description']) . "</p>
+                        <p style='text-align:left;color:red'>Pr. " . htmlspecialchars($course['userName']) . "</p>
+                        <a href='../../models/addMyCourse.php?userId=" . urlencode($course['userId']) . "&&courseId=" . urlencode($course['courseId']) . "' class='btn'>s'inscrire</a>
+                    </div>
+                ";
+            }
+        }
+    
+        $this->genererPagination($mots, $page, $limit);
+    }
+    
+    
+    private function genererPagination($mots, $page, $limit) {
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) as total
+            FROM courses
+            WHERE titre LIKE ?");
+        $mot = "%" . $mots . "%";
+        $stmt->execute([$mot]);
+        $totalCourses = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+    
+        $totalPages = ceil($totalCourses / $limit);
+    
+        echo "<div class='pagination'>";
+        for ($i = 1; $i <= $totalPages; $i++) {
+            $activeClass = ($i == $page) ? "class='active'" : "";
+            echo "<a href='?mots=" . urlencode($mots) . "&page=$i' $activeClass>$i</a>";
+        }
+        echo "</div>";
+    }
 }
+
+

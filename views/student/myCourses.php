@@ -12,8 +12,13 @@ else{
 require_once($_SERVER['DOCUMENT_ROOT'].'/youdemy/models/course.php');
 $studentId=$_SESSION['userId'];
 $myCourses=new Course();
+if (isset($_GET['page']))
+$courses=$myCourses->getMyCourses($studentId,$_GET['page']);
+else{
+$courses=$myCourses->getMyCourses($studentId,1);
 
-$courses=$myCourses->getMyCourses($studentId)
+}
+$page=$_GET['page'];
 
 
 ?>
@@ -25,6 +30,7 @@ $courses=$myCourses->getMyCourses($studentId)
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Course Display</title>
     <link rel="stylesheet" href="../../assests/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
 </head>
 
@@ -61,19 +67,44 @@ $courses=$myCourses->getMyCourses($studentId)
             <h2>Courses Overview</h2>
             <div class='cards'>
             <?php
-            foreach($courses as $course) 
+            foreach($courses[0] as $course) 
             echo"
                 <div class='card'>
                     <img src='../../assests/images/".$course['photo']."' alt='Course 1'>
                     <h3>".$course['titre']."</h3>
                     <p>".$course['description']."</p>
-                    <a href='#' class='btn'>View Details</a>
+                    <a href='courseContent.php?courseId=".$course['courseId']."&&".$_SESSION['userId']."' class='btn'>View Details</a>
                 </div>
               
                 ";
                 ?>
+                
+                
             </div>
         </section>
+        <!-- ================pagination======================== -->
+
+        <div class="pagination">
+            
+            <nav aria-label='Page navigation example'>
+                <ul class='pagination'>
+                    <li class='page-item'><a class='page-link' href='#'>Previous</a></li>
+                    <?php 
+                    for($i=1;$i<=$courses[1];$i++){
+                echo"
+                    <li class='page-item'><a class='page-link' href='?page=$i'>$i</a>&nbsp</li>
+            ";
+    }
+     ?>
+                 <?php 
+                 echo "<li class='page-item'><a class='page-link' href='?page=$page+1'>Next</a></li>" ?>   
+                </ul>
+</nav>
+
+
+               
+
+        </div>
     </div>
 
     <footer>
