@@ -1,6 +1,7 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/course.php');
 $course = new Course();
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -11,6 +12,10 @@ $course = new Course();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Course Display</title>
     <link rel="stylesheet" href="../assests/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
     <title>Header Navigation</title>
     <style>
@@ -244,22 +249,80 @@ $course = new Course();
 
 
                 <?php
-                if (isset($_POST['submit']) && $_POST['recherche'] == '') {
-                    $course->getAllCourses("visiteur");
-                } else if (!isset($_POST['submit'])) {
-                    $course->getAllCourses("visiteur");
-                } else {
+                     $courses = new Course();
+                 if (isset($_POST['submit']) && $_POST['recherche'] == ''){
+                    if (isset($_GET['page'])) {
+                        $page = $_GET['page'];
+                    
+                        $courses->getAllCourses("visiteur",$_GET['page']);
+                        echo $page;
+                    }
+                    else {
+                        $courses->getAllCourses("visiteur", 1);
+                   
+                   
+                    }
+                 }
 
-                    $course->rechercheCourse($_POST['recherche']);
+                 else if (!isset($_POST['submit'])) {
+                    if (isset($_GET['page'])) {
+                        $page = $_GET['page'];
+                    
+                        $courses->getAllCourses("visiteur",$_GET['page']);
+                        echo $page;
+                    }
+                    else {
+                        $courses->getAllCourses("visiteur", 1);
+                   
+                   
+                    }
                 }
+
+
+                else {
+                    if (isset($_GET['page']))
+
+                    $course->rechercheCourse($_POST['recherche'],$_GET['page']);
+                    else{
+                        $course->rechercheCourse($_POST['recherche'],1);
+                    }
+                }
+ 
+
+
+              
 
 
                 ?>
 
             </div>
         </section>
-    </div>
 
+        
+    </div>
+<!-- ================pagination======================== -->
+
+<div style="display: flex;justify-content: center" class="pagination">
+
+<nav aria-label='Page navigation example'>
+    <ul class='pagination'>
+
+        <?php
+
+        for ($i = 1; $i <= $_SESSION['nbrePages']; $i++) {
+            echo "
+        <li class='page-item'><a class='page-link' href='?page=$i'>$i</a>&nbsp</li>
+";
+        }
+        ?>
+
+    </ul>
+</nav>
+
+
+
+
+</div>
     <footer>
         <p>&copy; 2025 My Courses Platform. All rights reserved.</p>
     </footer>

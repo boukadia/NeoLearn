@@ -179,12 +179,24 @@ $_SESSION['nbrePages']=$nbrePages;
 
 
 
-    public function rechercheCourse($mots)
+    public function rechercheCourse($mots,$page)
     {
         $connect = new Database();
 
         $this->pdo = $connect->connect();
         $stmt = $this->pdo->prepare("SELECT users.userId,users.userName,courses.courseId,courses.courseStatus,courses.titre,courses.description,courses.photo FROM courses  INNER JOIN users ON (users.userId=courses.teacherId && courseStatus='active') where courses.titre like ?");
+        $mot = "%" . $mots . "%";
+        $stmt->execute(params: [$mot]);
+        $course = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $nbreElementParPage = 8;
+        $nbreCourse = count($course);
+        $nbrePages = ceil($nbreCourse / $nbreElementParPage);
+        $debut = ($page - 1) * $nbreElementParPage;
+        $_SESSION['nbrePages']=$nbrePages;
+
+        $stmt = $this->pdo->prepare("SELECT users.userId,users.userName,courses.courseId,courses.courseStatus,courses.titre,courses.description,courses.photo 
+        FROM courses  INNER JOIN users ON (users.userId=courses.teacherId && courseStatus='active') 
+        where courses.titre like ? LIMIT $debut,$nbreElementParPage ");
         $mot = "%" . $mots . "%";
         $stmt->execute(params: [$mot]);
         while ($course = $stmt->fetch(PDO::FETCH_ASSOC)) {
