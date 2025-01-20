@@ -103,7 +103,7 @@ class Course
         $stmt->execute();
         if ($userRole == 'admin') {
 
-          
+
             while ($courses = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 echo "
                 <tr>
@@ -185,7 +185,7 @@ class Course
 
 
 
-    public function getMyCourses($studentId,$page)
+    public function getMyCourses($studentId, $page)
     {
         $connect = new Database();
         $this->pdo = $connect->connect();
@@ -199,11 +199,11 @@ class Course
     
      WHERE enrollments.studentId = ?;");
         $stmt->execute([$studentId]);
-        $course=$stmt->fetchAll(PDO::FETCH_ASSOC);
-        $nbreElementParPage=3;
-       $nbreCourse= count($course);
-       $nbrePages=ceil($nbreCourse/$nbreElementParPage);
-       $debut=($page-1)*$nbreElementParPage;
+        $course = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $nbreElementParPage = 3;
+        $nbreCourse = count($course);
+        $nbrePages = ceil($nbreCourse / $nbreElementParPage);
+        $debut = ($page - 1) * $nbreElementParPage;
 
 
         $stmt = $this->pdo->prepare("SELECT courses.titre,courses.content,courses.description,courses.photo,users.userName,
@@ -217,9 +217,9 @@ class Course
      ;");
         $stmt->execute([$studentId]);
 
-       
-        
-         return  ([$stmt->fetchAll(PDO::FETCH_ASSOC),$nbrePages]);
+
+
+        return ([$stmt->fetchAll(PDO::FETCH_ASSOC), $nbrePages]);
 
 
 
@@ -297,62 +297,6 @@ class Course
         return $stmt->execute([$courseId]);
     }
     // ================================pagination===============================
-    
-    
-    public function rechercheCourseAvecPagination($mots, $page = 1, $limit = 5) {
-        $connect = new Database();
-        $this->pdo = $connect->connect();
-    
-        $offset = ($page - 1) * $limit;
-    
-        $stmt = $this->pdo->prepare("SELECT users.userName, users.userId, courses.courseId, courses.courseStatus, courses.titre, courses.description, courses.photo
-            FROM courses
-            INNER JOIN users ON users.userId = courses.teacherId
-            WHERE courses.titre LIKE :mot
-            LIMIT :limit OFFSET :offset");
-    
-        $mot = "%" . $mots . "%";
-        $stmt->bindValue(':mot', $mot, PDO::PARAM_STR);
-        $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
-        $stmt->bindValue(':offset', (int)$offset, PDO::PARAM_INT);
-    
-        $stmt->execute();
-    
-        while ($course = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            if ($course['courseStatus'] == 'active') {
-                echo "
-                    <div style='background-color:#ffcc80;flex-wrap:wrap' class='course-item'>
-                        <img src='../../assests/images/" . htmlspecialchars($course['photo']) . "' alt='Cours'>
-                        <h3>" . htmlspecialchars($course['titre']) . "</h3>
-                        <p>" . htmlspecialchars($course['description']) . "</p>
-                        <p style='text-align:left;color:red'>Pr. " . htmlspecialchars($course['userName']) . "</p>
-                        <a href='../../models/addMyCourse.php?userId=" . urlencode($course['userId']) . "&&courseId=" . urlencode($course['courseId']) . "' class='btn'>s'inscrire</a>
-                    </div>
-                ";
-            }
-        }
-    
-        $this->genererPagination($mots, $page, $limit);
-    }
-    
-    
-    private function genererPagination($mots, $page, $limit) {
-        $stmt = $this->pdo->prepare("SELECT COUNT(*) as total
-            FROM courses
-            WHERE titre LIKE ?");
-        $mot = "%" . $mots . "%";
-        $stmt->execute([$mot]);
-        $totalCourses = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
-    
-        $totalPages = ceil($totalCourses / $limit);
-    
-        echo "<div class='pagination'>";
-        for ($i = 1; $i <= $totalPages; $i++) {
-            $activeClass = ($i == $page) ? "class='active'" : "";
-            echo "<a href='?mots=" . urlencode($mots) . "&page=$i' $activeClass>$i</a>";
-        }
-        echo "</div>";
-    }
+
+
 }
-
-
