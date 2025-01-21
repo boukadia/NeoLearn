@@ -43,17 +43,20 @@ if ($_SESSION['role'] != "admin") {
     <?php 
     
      $afficherStatistiques=new Statistique();
-    $a= $afficherStatistiques->afficheNombreCourses();
+    $nombreCourses= $afficherStatistiques->afficheNombreCourses();
+ $nombreEnseignants= $afficherStatistiques->afficherNombreUsers();
+ $nombreEtudiantInscrit= $afficherStatistiques->afficheNombreEtudiantsInscrits();
 
-    foreach($a as $c)
-    $b[]=$c['titre']
+    
+
+  
     ?>
-    const labels =<?php echo json_encode($b ) ?> ;
+    const labels =["courses","Enseignants","Etudiants inscrit"] ;
 const data = {
   labels: labels,
   datasets: [{
     label: 'My First Dataset',
-    data: [65, 59, 80, 81, 56, 55, 40],
+    data:  [<?php echo json_encode($nombreCourses); ?>,<?php echo json_encode($nombreEnseignants); ?>,<?php echo json_encode($nombreEtudiantInscrit); ?>],
     backgroundColor: [
       'rgba(255, 99, 132, 0.2)',
       'rgba(255, 159, 64, 0.2)',
