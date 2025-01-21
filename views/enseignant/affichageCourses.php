@@ -47,11 +47,6 @@ require_once($_SERVER['DOCUMENT_ROOT'].'./youdemy/models/course.php');
     </aside>
 
 
-    <section class="button-section">
-    <a href="createCourse.php" class="add-category-button"><i class="fas fa-folder-plus"></i> Add courses</a>
-</section>
-
-
 
 
     <!-- Main Content -->

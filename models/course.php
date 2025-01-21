@@ -111,7 +111,7 @@ class Course
 
 
         // echo $nbreCourse;
-        $nbreElementParPage = 4;
+        $nbreElementParPage = 8;
 
         $nbrePages = ceil($nbreCourse / $nbreElementParPage);
         $debut = ($page - 1) * $nbreElementParPage;

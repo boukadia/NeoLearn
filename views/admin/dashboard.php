@@ -7,10 +7,9 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/statistique.php');
 session_start();
 
 session_regenerate_id(true); 
-echo $_SESSION['userId'];
 if ($_SESSION['role'] != "admin") {
     session_destroy();
-
+    echo( $_SESSION['role']);
     header("location : ../login.html");
     exit();
 } else {
@@ -35,10 +34,22 @@ if ($_SESSION['role'] != "admin") {
 </head>
 
 <body>
-<div style="width: 65%; margin-left:20%" >
+<?php print_r( $_SESSION['userName'])?>
+
+<div class="main-content">
+
+ <!-- Header -->
+ <header>
+            <div class="header-content">
+                <h1>Welcome to Your Dashboard</h1>
+               
+            </div>
+        </header>
+
+
+        <div style="width: 65%; margin-left:20%" >
   <canvas id="myChart"></canvas>
 </div>
-
 <script>
     <?php 
     
@@ -46,6 +57,8 @@ if ($_SESSION['role'] != "admin") {
     $nombreCourses= $afficherStatistiques->afficheNombreCourses();
  $nombreEnseignants= $afficherStatistiques->afficherNombreUsers();
  $nombreEtudiantInscrit= $afficherStatistiques->afficheNombreEtudiantsInscrits();
+ 
+//   ($coursesPopulaire= $afficherStatistiques->affichagePopulaireCourses());
 
     
 
@@ -55,8 +68,9 @@ if ($_SESSION['role'] != "admin") {
 const data = {
   labels: labels,
   datasets: [{
-    label: 'My First Dataset',
-    data:  [<?php echo json_encode($nombreCourses); ?>,<?php echo json_encode($nombreEnseignants); ?>,<?php echo json_encode($nombreEtudiantInscrit); ?>],
+    label: 'statistique',
+    data:  [<?php echo json_encode($nombreCourses); ?>,<?php echo json_encode($nombreEnseignants); ?>,
+    <?php echo json_encode($nombreEtudiantInscrit); ?>],
     backgroundColor: [
       'rgba(255, 99, 132, 0.2)',
       'rgba(255, 159, 64, 0.2)',
@@ -110,8 +124,6 @@ const config = {
             <ul>
                 <li><a href="dashboard.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
                 <li><a href="affichageCourses.php"><i class="fas fa-graduation-cap"></i> Manage Courses</a></li>
-                <li><a href="../../models/gestionUser.php"><i class="fas fa-users"></i> Manage Users</a></li>
-                <li><a href="statistics.php"><i class="fas fa-chart-bar"></i> Statistics</a></li>
                 <li><a href="affichageCatTag.php"><i class="fas fa-tags"></i> Categories/Tags</a></li>
                 <li><a href="affichageUsers.php"><i class="fas fa-chalkboard-teacher"></i> Enseignants</a></li>
                 <li><a href="../logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
@@ -119,39 +131,38 @@ const config = {
         </nav>
     </div>
 
-    <div class="main-content">
-        <!-- Header -->
-        <header>
-            <div class="header-content">
-                <h1>Welcome to Your Dashboard, Admin</h1>
-                <div class="profile">
-                    <img src="images/admin-profile.jpg" alt="Admin Profile" class="profile-img">
-                    <p>Admin Name</p>
-                </div>
-            </div>
-        </header>
+    
+       
+
+     
 
         <section class="dashboard-overview">
-            <h2>Overview</h2>
+            <h2>Courses Overview</h2>
             <div class="cards">
-                <div class="card">
-                    <h3>Total Courses</h3>
-                    <p>120</p>
-                </div>
-                <div class="card">
-                    <h3>Total Students</h3>
-                    <p>1500</p>
-                </div>
-                <div class="card">
-                    <h3>Total Teachers</h3>
-                    <p>40</p>
-                </div>
-                <div class="card">
-                    <h3>Active Enrollments</h3>
-                    <p>1100</p>
-                </div>
+                
+            <?php 
+         $afficherStatistiques=new Statistique();
+         $coursesPopulaire=[];
+
+           ($coursesPopulaire= $afficherStatistiques->affichagePopulaireCourses());
+            foreach($coursesPopulaire as $courses)
+              {
+               echo"
+                <div class='card'>
+                    <img src='../../assests/images/".$courses['photo']."' alt='Course'>
+                    <h3>".$courses['titre']."</h3>
+                    <p>Pr: ".$courses['userName']."</p>
+                    <p>total inscrit:".$courses['total']."</p>
+                </div>";
+            }?>
+               
             </div>
         </section>
+
+
+
+
+
 
 
 
@@ -160,44 +171,11 @@ const config = {
 
 
         
+
+
+        
         <!------------------------ Course Management ---------------------------------->
-        <section class="course-management">
-            <h2>Manage Courses</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Course Title</th>
-                        <th>Instructor</th>
-                        <th>Enrolled Students</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>HTML for Beginners</td>
-                        <td>John Doe</td>
-                        <td>200</td>
-                        <td><span class="status active">Active</span></td>
-                        <td><a href="edit-course.html" class="edit-btn">delete</a></td>
-                    </tr>
-                    <tr>
-                        <td>CSS Mastery</td>
-                        <td>Jane Smith</td>
-                        <td>180</td>
-                        <td><span class="status inactive">Inactive</span></td>
-                        <td><a href="edit-course.html" class="edit-btn">delete</a></td>
-                    </tr>
-                    <tr>
-                        <td>JavaScript Essentials</td>
-                        <td>Michael Johnson</td>
-                        <td>150</td>
-                        <td><span class="status active">Active</span></td>
-                        <td><a href="edit-course.html" class="edit-btn">delete</a></td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+       
 
 
 

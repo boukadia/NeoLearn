@@ -41,9 +41,13 @@ class Statistique extends User
     public function affichagePopulaireCourses(){
         $connect=new Database();
         $this->pdo=$connect->connect();
-        $stmt=$this->pdo->prepare("(SELECT courseId,COUNT(studentId) as total FROM enrollments GROUP by courseId ORDER by total  ASC)");
+        $stmt=$this->pdo->prepare("SELECT courses.photo, enrollments.courseId,COUNT(enrollments.studentId) as total,courses.titre,users.userName 
+FROM courses
+inner JOIN users on courses.teacherId=users.userId
+inner join enrollments on  enrollments.courseId=courses.courseId
+GROUP by courseId ORDER by total  DESC limit 2");
         $stmt->execute();
-        return $nombreEtudiant=count($stmt->fetchAll(pdo::FETCH_ASSOC));
+        return ($stmt->fetchall(pdo::FETCH_ASSOC));
         
         
     }
