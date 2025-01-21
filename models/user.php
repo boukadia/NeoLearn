@@ -54,7 +54,7 @@ public function getRole(){
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($user && password_verify($password, $user['password'])) {
             $_SESSION['userId'] = $user['userId'];
-            $_SESSION['userName'] = $user['username'];
+            $_SESSION['userName'] = $user['userName'];
             $_SESSION['email'] = $user['email'];
             $_SESSION['status'] = $user['status'];
             $_SESSION['role'] = $user['role'];

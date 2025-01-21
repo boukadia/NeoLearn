@@ -80,7 +80,9 @@ header .header-content,
   justify-content: space-between;
   align-items: center;
 }
-
+h1 {
+  color: #ae8827;
+}
 header .header-content h1,
 .header .header-content h1 {
   font-size: 28px;
@@ -721,14 +723,11 @@ button.btn:hover {
 }
 /* ============================================ */
 a {
-text-decoration: none;
-
+  text-decoration: none;
 }
 
-
 /* ====================================== */
 /* ====================================== */
 /* ====================================== */
-
 
 /* ===========================contentVideo======================= */

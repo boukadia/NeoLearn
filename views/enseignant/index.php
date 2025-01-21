@@ -2,11 +2,13 @@
 require_once($_SERVER['DOCUMENT_ROOT'].'./youdemy/models/course.php');
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/user.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/statistique.php');
 // session_start();
 session_start();
 session_regenerate_id(true); 
 
 $teacherId=$_SESSION['userId'];
+$teacherName=$_SESSION['userName'];
 // echo $teacherId;
 
 if ($_SESSION['role'] != "enseignant" ||$_SESSION['status']=="pending") {
@@ -57,7 +59,7 @@ if ($_SESSION['role'] != "enseignant" ||$_SESSION['status']=="pending") {
         <!-- Header Section -->
         <header class="header">
             <div class="header-content">
-                <h1>Professeur John Doe</h1>
+                <h1>Professeur <?php echo $teacherName ?></h1>
                 <div class="profile">
                     <img src="images/teacher-pic.jpg" alt="Professeur John Doe" class="profile-img">
                     <div class="profile-info">
@@ -69,7 +71,20 @@ if ($_SESSION['role'] != "enseignant" ||$_SESSION['status']=="pending") {
             </div>
         </header>
         
-        
+        <div class="dashboard-overview">
+          <h2>Courses Overview</h2>
+          <div class="cards">
+           <?php
+           $coursesPopulaire =new Statistique();
+           $coursesPopulaire->affichagePopulaireCoursesForTeacher($teacherId);
+          
+          
+    ?>
+    
+    
+  </div>
+</div>
+
         <div class="dashboard-overview">
           <h2>Courses Overview</h2>
           <div class="cards">

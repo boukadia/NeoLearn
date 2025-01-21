@@ -7,6 +7,8 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/statistique.php');
 session_start();
 
 session_regenerate_id(true); 
+$admin=$_SESSION['userName'];
+
 if ($_SESSION['role'] != "admin") {
     session_destroy();
     echo( $_SESSION['role']);
@@ -41,7 +43,7 @@ if ($_SESSION['role'] != "admin") {
  <!-- Header -->
  <header>
             <div class="header-content">
-                <h1>Welcome to Your Dashboard</h1>
+                <h1>Welcome , <?php echo $admin ?></h1>
                
             </div>
         </header>
@@ -137,7 +139,7 @@ const config = {
      
 
         <section class="dashboard-overview">
-            <h2>Courses Overview</h2>
+            <h2>les meilleurs Courses</h2>
             <div class="cards">
                 
             <?php 
@@ -152,7 +154,7 @@ const config = {
                     <img src='../../assests/images/".$courses['photo']."' alt='Course'>
                     <h3>".$courses['titre']."</h3>
                     <p>Pr: ".$courses['userName']."</p>
-                    <p>total inscrit:".$courses['total']."</p>
+                    <p> Inscris:".$courses['total']."</p>
                 </div>";
             }?>
                
