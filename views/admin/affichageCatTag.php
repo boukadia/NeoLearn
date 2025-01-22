@@ -5,6 +5,8 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/tags.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/category.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/user.php');
 session_start();
+$admin=$_SESSION['userName'];
+
 if ($_SESSION['role'] != "admin") {
     session_destroy();
 
@@ -62,7 +64,7 @@ if ($_SESSION['role'] != "admin") {
 <!-- Section for Add Tag and Add Category buttons -->
 <section class="button-section">
     <a href="../../models/addCategory.php" class="add-category-button"><i class="fas fa-folder-plus"></i> Add Category</a>
-    <a href="../../models/addCategory.php"  class="add-tag-button"><i class="fas fa-tag"></i> Add Tags</a>
+    <a href="../../models/addTags.php"  class="add-tag-button"><i class="fas fa-tag"></i> Add Tags</a>
 </section>
 
 

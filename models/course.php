@@ -16,8 +16,13 @@ class Course
     {
         $connect = new Database();
         $this->pdo = $connect->connect();
+        $this->content;
     }
 
+    public function getContent()
+    {
+        return $this->content;
+    }
     public function addCourse($titre, $description, $content, $photo, $userId, $categoryId, $tags, $type)
     {
         $connect = new Database();
@@ -237,20 +242,21 @@ users.userId=courses.teacherId LIMIT $debut,$nbreElementParPage ");
 
         $stmt = $this->pdo->prepare("SELECT courses.titre,courses.content,courses.description,courses.photo,users.userName,
         enrollments.studentId,enrollments.courseId, category.categoryName
-         FROM enrollments INNER JOIN courses ON enrollments.courseId=courses.courseId 
+        FROM enrollments 
+        INNER JOIN courses ON enrollments.courseId=courses.courseId 
         inner JOIN users ON enrollments.studentId=users.userId
-         inner JOIN category ON courses.categoryId = category.categoryId
-    
-     WHERE enrollments.studentId = ?;");
+        inner JOIN category ON courses.categoryId = category.categoryId
+        WHERE enrollments.studentId = ?;");
         $stmt->execute([$studentId]);
         $course = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $nbreCourse = count($course);/* count */
+
         $nbreElementParPage = 8;
-        $nbreCourse = count($course);
         $nbrePages = ceil($nbreCourse / $nbreElementParPage);
         $debut = ($page - 1) * $nbreElementParPage;
 
 
-        $stmt = $this->pdo->prepare("SELECT courses.titre,courses.content,courses.description,courses.photo,users.userName,
+        $stmt = $this->pdo->prepare("SELECT courses.titre,courses.type,courses.content,courses.description,courses.photo,users.userName,
         enrollments.studentId,enrollments.courseId, category.categoryName
          FROM enrollments INNER JOIN courses ON enrollments.courseId=courses.courseId 
         inner JOIN users ON enrollments.studentId=users.userId
@@ -343,4 +349,11 @@ users.userId=courses.teacherId LIMIT $debut,$nbreElementParPage ");
     WHEN courseStatus='desactive' THEN 'active' ELSE 'desactive' END WHERE courseId=?");
         return $stmt->execute([$courseId]);
     }
+    // ================================affichage du contenu du coures==============================
+    public function affichageContenu($url,$type)
+    {
+
+        echo $this->content;
+    }
+    
 }

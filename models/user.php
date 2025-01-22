@@ -3,29 +3,31 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/config/database.php');
 // require_once "../config/database.php";
 class User
 {
-private $userName;
-private $role;
+    private $nom;
+    private $email;
+    private $password;
+    private $role;
 
     private $pdo;
 
-    public function __construct() {
+    public function __construct()
+    {
         $connect = new Database();
         $this->pdo = $connect->connect();
     }
-public function getNom(){
-   return $this->userName;
-    
-}
-public function getRole(){
-   return $this->role;
-}
+    public function getNom()
+    {
+        return $this->nom;
+    }
+    public function getRole()
+    {
+        return $this->role;
+    }
     public function register($userName, $email, $password, $role)
     {
 
 
 
-        // $connect = new Database();
-        // $this->pdo = $connect->connect();
         $hashPassword = password_hash($password, PASSWORD_DEFAULT);
 
         $stmt = $this->pdo->prepare("SELECT * FROM users");
@@ -43,11 +45,8 @@ public function getRole(){
     public function login($email, $password)
     {
         session_start();
-        session_regenerate_id(true); 
-        // $connect = new Database();
-        // $this->pdo = $connect->connect();
+        session_regenerate_id(true);
 
-        // $hashPassword = password_hash($this->password, PASSWORD_DEFAULT);
 
         $stmt = $this->pdo->prepare("SELECT * FROM users where email=?");
         $stmt->execute([$email]);
@@ -76,22 +75,17 @@ public function getRole(){
     public function getUsers()
     {
 
-        // $connect = new Database();
-        // $this->pdo = $connect->connect();
-
-        // $hashPassword = password_hash($this->password, PASSWORD_DEFAULT);
 
         $stmt = $this->pdo->prepare("SELECT * FROM users where role='enseignant' ");
         $stmt->execute();
-       return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
 
 
     public function switchActive($userId)
     {
-        // $connect = new Database();
-        // $this->pdo = $connect->connect();
+
         $stmt = $this->pdo->prepare("UPDATE users SET status = CASE 
     WHEN status = 'pending' THEN 'active' ELSE 'pending' END WHERE userId = ?");
 

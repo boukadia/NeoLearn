@@ -9,7 +9,7 @@ $course=new Course();
 $course->softDeleteCourse($courseId);
 // if($role=="enseignant")
 
-header("location: ../views/admin/dashboard.php");
+header("location: ../views/admin/affichageCourses.php");
 
 
 

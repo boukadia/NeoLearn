@@ -3,6 +3,8 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/user.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . './youdemy/models/course.php');
 session_start();
 session_regenerate_id(true); 
+$admin=$_SESSION['userName'];
+
 $teacherId = $_SESSION['userId'];
 if ($_SESSION['role'] != "admin") {
     session_destroy();
@@ -43,9 +45,7 @@ if ($_SESSION['role'] != "admin") {
     </div>
 
 
-    <section class="button-section">
-        <a href="createCourse.php" class="add-category-button"><i class="fas fa-folder-plus"></i> Add courses</a>
-    </section>
+  
 
 
 
@@ -53,19 +53,7 @@ if ($_SESSION['role'] != "admin") {
     <!-- Main Content -->
     <main class="main-content">
         <!-- Header Section -->
-        <header class="header">
-            <div class="header-content">
-                <h1>Professeur John Doe</h1>
-                <div class="profile">
-                    <img src="images/teacher-pic.jpg" alt="Professeur John Doe" class="profile-img">
-                    <div class="profile-info">
-                        <p class="role">Enseignant - Developpement Web</p>
-                        <p class="experience"><i class="fas fa-briefcase"></i> 5 ans d'expérience</p>
-                        <a href="mailto:teacher@example.com" class="contact-btn">Contacter</a>
-                    </div>
-                </div>
-            </div>
-        </header>
+      
 
         <!------------------------ Course Management ---------------------------------->
         <section class="course-management">

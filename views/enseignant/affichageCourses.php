@@ -1,9 +1,9 @@
-<?php 
+<?php
 
 session_start();
-session_regenerate_id(true); 
-$teacherId=$_SESSION['userId'];
-if ($_SESSION['role'] != "enseignant" ||$_SESSION['status']=="pending") {
+session_regenerate_id(true);
+$teacherId = $_SESSION['userId'];
+if ($_SESSION['role'] != "enseignant" || $_SESSION['status'] == "pending") {
     session_destroy();
     header("location : ../login.html");
     exit();
@@ -11,12 +11,13 @@ if ($_SESSION['role'] != "enseignant" ||$_SESSION['status']=="pending") {
 };
 
 
-require_once($_SERVER['DOCUMENT_ROOT'].'./youdemy/models/course.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . './youdemy/models/course.php');
 ?>
 
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,8 +27,12 @@ require_once($_SERVER['DOCUMENT_ROOT'].'./youdemy/models/course.php');
 
     <title>Document</title>
 </head>
+
 <body>
 
+    <section class="button-section">
+        <a href="createCourse.php" class="add-category-button"><i class="fas fa-folder-plus"></i> Add courses</a>
+    </section>
 
 
     <!-- Sidebar -->
@@ -65,24 +70,25 @@ require_once($_SERVER['DOCUMENT_ROOT'].'./youdemy/models/course.php');
                 </div>
             </div>
         </header>
-        
-        
+
+
         <div class="dashboard-overview">
-          <h2>Courses Overview</h2>
-          <div class="cards">
-            
-            <?php
-$course=new Course();
+            <h2>Courses Overview</h2>
+            <div class="cards">
+
+                <?php
+                $course = new Course();
 
 
-$course->getCourses($teacherId)
-?>
-    
-    
-  </div>
-</div>
-</main>main
+                $course->getCourses($teacherId)
+                ?>
+
+
+            </div>
+        </div>
+    </main>main
 
 
 </body>
+
 </html>

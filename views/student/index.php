@@ -5,7 +5,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/course.php');
 session_start();
 // session_start();
 session_regenerate_id(true); 
-echo $_SESSION['userId'];
+$etudiantName= $_SESSION['userName'];
 
 if ($_SESSION['role'] !== "student") {
     session_destroy();
@@ -46,12 +46,9 @@ if ($_SESSION['role'] !== "student") {
         <nav class="sidebar-nav">
             <ul>
                 <li><a href="index.php"><i class="fas fa-home"></i> Accueil</a></li>
-                <li><a href="profile.php"><i class="fas fa-user"></i> Profil</a></li>
                 <li><a href="myCourses.php"><i class="fas fa-graduation-cap"></i> Cours</a></li>
                 <li><a href="../logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
 
-                <!-- <li><a href="teachers.php"><i class="fas fa-chalkboard-teacher"></i> Enseignants</a></li>
-                <li><a href="contact.php"><i class="fas fa-headset"></i> Contact</a></li> -->
             </ul>
         </nav>
     </aside>
@@ -61,13 +58,9 @@ if ($_SESSION['role'] !== "student") {
         <!-- Header Section -->
         <header class="header">
             <div class="header-content">
-                <h1>Profil de Marie Dupont</h1>
+                <h1>Profil de <?php echo $etudiantName?> </h1>
                 <div class="profile">
-                    <img src="images/student-pic.jpg" alt="Marie Dupont" class="profile-img">
                     <div class="profile-info">
-                        <p class="role">Étudiant - Développement Web</p>
-                        <p class="email"><i class="fas fa-envelope"></i> marie.dupont@example.com</p>
-                        <a href="mailto:marie.dupont@example.com" class="contact-btn">Contacter</a>
                     </div>
                 </div>
             </div>
@@ -75,7 +68,7 @@ if ($_SESSION['role'] !== "student") {
 
         <!-- Mes Cours -->
         <section class="my-courses">
-            <h2>Mes Cours</h2>
+            <h2>Learn Anything</h2>
             <div style='flex-wrap:wrap' class="courses-list">
 
                 <?php
@@ -101,24 +94,7 @@ if ($_SESSION['role'] !== "student") {
             </div>
         </section>
 
-        <!-- Statistiques -->
-        <section class="student-stats">
-            <h2>Mes Statistiques</h2>
-            <div class="stats-container">
-                <div class="stat-item">
-                    <h3>Cours Complétés</h3>
-                    <p>3 sur 5</p>
-                </div>
-                <div class="stat-item">
-                    <h3>Note Moyenne</h3>
-                    <p>85%</p>
-                </div>
-                <div class="stat-item">
-                    <h3>Progrès</h3>
-                    <p>75%</p>
-                </div>
-            </div>
-        </section>
+     
 
     
     </main>

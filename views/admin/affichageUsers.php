@@ -4,6 +4,8 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/user.php');
 session_start();
 session_regenerate_id(true); 
+$admin=$_SESSION['userName'];
+
 if ($_SESSION['role'] != "admin") {
     session_destroy();
 
@@ -47,7 +49,7 @@ if ($_SESSION['role'] != "admin") {
 
         <header>
             <div class="header-content">
-                <h1>Welcome to Your Dashboard, Admin</h1>
+            <h1>Welcome , <?php echo $admin ?></h1>
                 <div class="profile">
                     <img src="images/admin-profile.jpg" alt="Admin Profile" class="profile-img">
                     <p>Admin Name</p>
@@ -74,12 +76,10 @@ if ($_SESSION['role'] != "admin") {
                 echo "
                  <tbody>
                         <tr>
-                            <td>" . $user['userName'] . "</td>
+                            <td>Pr." . $user['userName'] . "</td>
                           
                             <td><span class='status active'>" . $user['status'] . "</span></td>
-                            <td><a href='../../models/deleteUser.php?userId=" . $user['userId'] . "' class='edit-btn'>delete</a>
-                            <a href='../../models/switch.php?userId=" . $user['userId'] . "' class='edit-btn'>switch</a>
-                            </td>
+                            <td><a href='../../models/switch.php?userId=" . $user['userId'] . "' class='edit-btn'>switch</a></td>
                         </tr>
                     </tbody>
                 ";

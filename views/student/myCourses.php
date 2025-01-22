@@ -41,8 +41,8 @@ if (isset($_GET['page'])) {
         </div>
         <nav class="sidebar-nav">
             <ul>
-                <li><a href="index.php"><i class="fas fa-home"></i> Accueil</a></li>
-                <li><a href="profile.php"><i class="fas fa-user"></i> Profil</a></li>
+           
+            <li><a href="index.php"><i class="fas fa-home"></i> Accueil</a></li>
                 <li><a href="myCourses.php"><i class="fas fa-graduation-cap"></i> Cours</a></li>
                 <li><a href="../logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
             </ul>
@@ -73,7 +73,7 @@ if (isset($_GET['page'])) {
                     <img src='../../assests/images/" . $course['photo'] . "' alt='Course 1'>
                     <h3>" . $course['titre'] . "</h3>
                     <p>" . $course['description'] . "</p>
-                    <a href='courseContent.php?courseId=" . $course['courseId'] . "&&" . $_SESSION['userId'] . "' class='btn'>View Details</a>
+                    <a href='courseContent.php?courseId=" . $course['courseId'] . "&& userId=" . $_SESSION['userId'] ."&& content=".$course['content']."&& type=".$course['type']."&& teacher=".$course['userName']."' class='btn'>View Details</a>
                 </div>
               
                 ";
