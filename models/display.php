@@ -40,6 +40,7 @@ class Video extends Course
                 <a href='$url' class='cta-button'>Continuer vers le cours</a>
             </div>";
 
+            
 
 
 
