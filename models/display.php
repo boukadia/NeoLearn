@@ -43,7 +43,7 @@ class Video extends Course
 
 
 
-            
+
             // 
         }
     }

@@ -4,7 +4,7 @@ header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 
 include_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/course.php');
-include_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/video.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/display.php');
 $content = $_GET['content'];
 $type = $_GET['type'];
 
