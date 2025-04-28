@@ -1,7 +1,7 @@
 
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/user.php');
-include_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/course.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy1/models/user.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy1/models/course.php');
 //  include("../../../config/config.php");
 if (isset($_GET['userId'])){
 

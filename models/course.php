@@ -1,5 +1,7 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . './youdemy/config/database.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy1/config/database.php');
+// require_once(__DIR__ . '/../config/database.php');
+
 class Course
 {
     private $titre;

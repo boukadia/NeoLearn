@@ -1,8 +1,8 @@
 
 <?php 
 
-require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/user.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/statistique.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy1/models/user.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy1/models/statistique.php');
 
 session_start();
 

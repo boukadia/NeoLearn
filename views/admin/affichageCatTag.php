@@ -1,9 +1,9 @@
 <?php
 
 
-require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/tags.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/category.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/user.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy1/models/tags.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy1/models/category.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy1/models/user.php');
 session_start();
 $admin=$_SESSION['userName'];
 

@@ -9,7 +9,7 @@ if ($_SESSION['role'] != 'student') {
     exit();
 } else {
 }
-require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/course.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy1/models/course.php');
 $studentId = $_SESSION['userId'];
 $myCourses = new Course();
 if (isset($_GET['page'])) {

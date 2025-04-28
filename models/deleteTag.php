@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] .'/youdemy/models/tags.php');
+require_once($_SERVER['DOCUMENT_ROOT'] .'/youdemy1/models/tags.php');
 
 $tagId=$_GET['tagId'];
 $tag=new tags();

@@ -11,7 +11,7 @@ if ($_SESSION['role'] != "enseignant" || $_SESSION['status'] == "pending") {
 };
 
 
-require_once($_SERVER['DOCUMENT_ROOT'] . './youdemy/models/course.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . './youdemy1/models/course.php');
 ?>
 
 

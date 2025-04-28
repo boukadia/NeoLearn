@@ -2,7 +2,7 @@
 // session_start();
 session_start();
 session_regenerate_id(true); 
-require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/user.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy1/models/user.php');
 if (isset($_POST['register'])) {
     $userName = $_POST['userName'];
     $password = $_POST['password'];

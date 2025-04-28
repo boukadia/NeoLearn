@@ -1,8 +1,9 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'].'./youdemy/models/course.php');
 
-require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/user.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/statistique.php');
+// require_once($_SERVER['DOCUMENT_ROOT'].'./youdemy1/models/course.php');
+
+require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy1/models/user.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy1/models/statistique.php');
 // session_start();
 session_start();
 session_regenerate_id(true); 

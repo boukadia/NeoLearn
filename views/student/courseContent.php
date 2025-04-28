@@ -3,8 +3,8 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 
-include_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/course.php');
-include_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/display.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy1/models/course.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy1/models/display.php');
 $content = $_GET['content'];
 $type = $_GET['type'];
 
@@ -19,7 +19,7 @@ $type = $_GET['type'];
     <title>Cours en ligne - Introduction à JavaScript</title>
     <!-- <link rel="stylesheet" href="../../assests/css/style.css"> -->
 
-    <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/assests/css/header/head.php') ?>
+    <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy1/assests/css/header/head.php') ?>
 </head>
 
 <body>

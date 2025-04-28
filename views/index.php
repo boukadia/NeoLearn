@@ -1,5 +1,6 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/course.php');
+// echo $_SERVER['DOCUMENT_ROOT'];
+require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy1/models/course.php');
 $course = new Course();
 // session_start();
 session_start();
@@ -21,7 +22,7 @@ session_regenerate_id(true);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
     <title>Header Navigation</title>
 <?php 
-require_once($_SERVER['DOCUMENT_ROOT'].'/youdemy/assests/css/header/header.php')
+require_once($_SERVER['DOCUMENT_ROOT'].'/youdemy1/assests/css/header/header.php')
 ?>
        
 </head>

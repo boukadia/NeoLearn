@@ -1,7 +1,7 @@
 <?php
 
-require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/course.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/user.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy1/models/course.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy1/models/user.php');
 session_start();
 $courseId=$_GET['courseId'];
 $connect=new Database();
@@ -75,7 +75,7 @@ if (isset($_POST['submit'])) {
                     <div class='tags-wrapper'>
                         <?php
 
-// require_once($_SERVER['DOCUMENT_ROOT'.'./youdemy/models/course.php']);
+// require_once($_SERVER['DOCUMENT_ROOT'.'./youdemy1/models/course.php']);
 $tag = new Course();
 
 $tag->getTags();

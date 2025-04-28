@@ -1,7 +1,7 @@
 
 <?php 
 
-require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy/models/user.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/youdemy1/models/user.php');
 session_start();
 session_regenerate_id(true); 
 $admin=$_SESSION['userName'];
